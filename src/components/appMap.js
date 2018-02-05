@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import { Dimensions, Text , FlatList, View, Button, AppRegistry, StyleSheet, ListView } from 'react-native';
 import MapView from 'react-native-maps';
@@ -11,7 +10,6 @@ const LATITUDE = 60.1699;
 const LONGITUDE = 24.9384;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
-
 const GOOGLE_MAPS_APIKEY = 'AIzaSyBa1PSCHdZ74voA-BJTF1GGtRvNg_GuaLs';
 
 export class AppMap extends Component {

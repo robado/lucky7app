@@ -5,7 +5,7 @@ export default class AppFooter extends Component{
     render(){
         return(
             <Text>
-                Header
+                Footer
             </Text>
         );
     }
