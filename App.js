@@ -8,7 +8,7 @@ import AppFooter from './src/components/appFooter';
 import {AppMap} from './src/components/appMap';
 
 
-export default class lycky7app extends Component{
+export default class lucky7app extends Component{
     render() {
         return (
             <View>
