@@ -17,8 +17,12 @@ class HomeScreen extends React.Component {
         return (
             <View>
                 <Button
-                    title = "Navigate to Profile"
-                    onPress= { ()=> navigate('Profile') }>
+                title = "Avaa Maps"
+                onPress= { ()=> navigate('Maps') }>
+            </Button>
+                <Button
+                    title = "Avaa Json"
+                    onPress= { ()=> navigate('Json') }>
                 </Button>
                 
             </View>
@@ -26,27 +30,35 @@ class HomeScreen extends React.Component {
     }
 }
 
-class ProfileScreen extends React.Component {
+class MapsScreen extends React.Component {
     static navigationOptions = {
         title: 'ProfileScreen',
     };
     render() {
-        const { navigate } = this.props.navigation;
+
         return (
-            <View>
-                <Button
-                    title = " Navigate to Home"
-                    onPress= { ()=> navigate('Home') }>
-                </Button>
-                <AppJson/>
-            </View>
+            <AppMap/>
+        )
+    }
+}
+
+
+class JsonScreen extends React.Component {
+    static navigationOptions = {
+        title: 'JsonScreen',
+    };
+    render() {
+
+        return (
+            <AppJson/>
         )
     }
 }
 
 const NavigationApp = StackNavigator({
     Home: {screen: HomeScreen},
-    Profile: {screen: ProfileScreen},
+    Maps: {screen: MapsScreen},
+    Json: {screen: JsonScreen}
 }, {
     navigationOptions: {
         headerStyle: {
