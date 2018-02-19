@@ -17,9 +17,12 @@ const GooglePlacesInput = () => {
             listViewDisplayed='auto'    // true/false/undefined
             fetchDetails={true}
             renderDescription={(row) => row.description} // custom description render
-            onPress={(data, details = true) => { // 'details' is provided when fetchDetails = true
+            onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
                 console.log(data);
                 console.log(details);
+                const latti = data.geometry.location.lat;
+                const longi = data.geometry.location.lng;
+                alert(longi);
 
             }}
             getDefaultValue={() => {
