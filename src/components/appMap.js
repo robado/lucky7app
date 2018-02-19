@@ -4,7 +4,6 @@ import {
     TouchableOpacity
 } from 'react-native';
 import MapView from 'react-native-maps';
-import Callout  from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import MarkerCalloutDefault from './MarkerCalloutDefault';
 
@@ -49,9 +48,6 @@ export class AppMap extends Component {
     };
 
     render() {
-        function onPressLearnMore(){
-            alert("moi pelle");
-        }
         return (
             <View>
                 <MapView
@@ -61,7 +57,7 @@ export class AppMap extends Component {
                         latitudeDelta: LATITUDE_DELTA,
                         longitudeDelta: LONGITUDE_DELTA,
                     }}
-                    style={{ alignSelf: 'stretch', height: 250, marginTop: 25, }}
+                    style={{ alignSelf: 'stretch', height: 594, }}
                     ref={c => this.mapView = c}
                     onPress={this.onMapPress}
                     showsUserLocation={true}
@@ -102,12 +98,6 @@ export class AppMap extends Component {
                         />
                     )}
                 </MapView>
-                <Button
-                    onPress={onPressLearnMore}
-                    title="NAPPI"
-                    color="#841584"
-                    accessibilityLabel="Learn more about this purple button"
-                />
 
             </View>
         );
