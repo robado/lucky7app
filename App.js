@@ -68,7 +68,9 @@ class PlacesScreen extends React.Component {
     render() {
 
         return (
-            <GooglePlacesInput/>
+
+                <GooglePlacesInput/>
+
         )
     }
 }

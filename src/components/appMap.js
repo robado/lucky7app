@@ -6,6 +6,8 @@ import {
 import MapView from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import MarkerCalloutDefault from './MarkerCalloutDefault';
+import GooglePlacesInput from './AppPlaces';
+
 
 
 const { width, height } = Dimensions.get('window');
@@ -25,8 +27,8 @@ export class AppMap extends Component {
         this.state = {
             coordinates: [
                 {
-                    latitude: 60.1699,
-                    longitude: 24.9384,
+                    latitude: parseFloat(GooglePlacesInput.latti._55),
+                    longitude: parseFloat(GooglePlacesInput.longi._55),
                 },
                 {
                     latitude:  60.2933,
@@ -48,6 +50,8 @@ export class AppMap extends Component {
     };
 
     render() {
+        alert(parseFloat(GooglePlacesInput.latti._55));
+        console.log(GooglePlacesInput.longi._55)
         return (
             <View>
                 <MapView
@@ -98,7 +102,6 @@ export class AppMap extends Component {
                         />
                     )}
                 </MapView>
-
             </View>
         );
     }
@@ -118,9 +121,9 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         alignItems: 'center',
     },
-    map: {
+  /* map: {
         ...StyleSheet.absoluteFillObject,
-    },
+    }*/
     bubble: {
         flex: 1,
         backgroundColor: 'rgba(255,255,255,0.7)',
@@ -146,3 +149,4 @@ const styles = StyleSheet.create({
 });
 
 module.export = AppMap;
+
