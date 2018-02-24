@@ -61,7 +61,7 @@ export class AppMap extends Component {
                         latitudeDelta: LATITUDE_DELTA,
                         longitudeDelta: LONGITUDE_DELTA,
                     }}
-                    style={{ alignSelf: 'stretch', height: 594, }}
+                    style={{ alignSelf: 'stretch', paddingBottom: 100, height: '90%', }}
                     ref={c => this.mapView = c}
                     onPress={this.onMapPress}
                     showsUserLocation={true}
