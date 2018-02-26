@@ -50,8 +50,7 @@ export class AppMap extends Component {
     };
 
     render() {
-        alert(parseFloat(GooglePlacesInput.latti._55));
-        console.log(GooglePlacesInput.longi._55)
+
         return (
             <View>
                 <MapView
