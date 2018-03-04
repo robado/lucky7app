@@ -9,77 +9,80 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 
 export class GooglePlacesInput extends Component {
 
-render(){
 
-    return (
+    render(){
 
-        <GooglePlacesAutocomplete
-            style={{marginTop:100,}}
-            placeholder='Search'
-            minLength={2} // minimum length of text to search
-            autoFocus={true}
-            returnKeyType={'search'} // Can be left out for default return key https://facebook.github.io/react-native/docs/textinput.html#returnkeytype
-            listViewDisplayed='true'    // true/false/undefined
-            fetchDetails={true}
-            renderDescription={(row) => row.description} // custom description render
-            onPress={(data, details = null) =>  {   // 'details' is provided when fetchDetails = true
-                //console.log(data);
-                console.log(details.geometry.location);
-                AsyncStorage.setItem('lattiAsync', details.geometry.location.lat.toString());
-                AsyncStorage.setItem('longiAsync', details.geometry.location.lng.toString());
-               //this.latti = data.geometry.location.lat;
-               //this.longi = data.geometry.location.lng;
+        return (
 
-                console.log(GooglePlacesInput.latti);
-                console.log(GooglePlacesInput.longi);
+            <GooglePlacesAutocomplete
+                placeholder='Search'
+                minLength={2} // minimum length of text to search
+                autoFocus={true}
+                returnKeyType={'search'} // Can be left out for default return key https://facebook.github.io/react-native/docs/textinput.html#returnkeytype
+                listViewDisplayed='true'    // true/false/undefined
+                fetchDetails={true}
+                renderDescription={(row) => row.description} // custom description render
+                onPress={(data, details = null) =>  {   // 'details' is provided when fetchDetails = true
+                    //console.log(data);
 
+                    // AsyncStorage.setItem('kaupunkiAsync', details.name);
 
-            }
-            }
-            getDefaultValue={() => {
-                return ''; // text input default value
-            }}
-            query={{
-                // available options: https://developers.google.com/places/web-service/autocomplete
-                key: ' AIzaSyDY6KpN2rzNeL-86blWwMeG0plkZlWVoi0 ',
-                language: 'en', // language of the results
-                types: '(cities)' // default: 'geocode'
-            }}
-            styles={{
-                description: {
-                    fontWeight: 'bold'
-                },
-                predefinedPlacesDescription: {
-                    color: '#1faadb'
+                    AsyncStorage.setItem('lattiAsync', details.geometry.location.lat.toString());
+                    AsyncStorage.setItem('longiAsync', details.geometry.location.lng.toString());
+                    //this.latti = data.geometry.location.lat;
+                    //this.longi = data.geometry.location.lng;
+                    console.log("oikea latitude" + details.geometry.location.lat);
+                    console.log("oikea longitude" + details.geometry.location.lng);
+                    /* console.log(GooglePlacesInput.latti);
+                     console.log(GooglePlacesInput.longi);
+                     console.log(GooglePlacesInput.kaupunki);*/
+
+                    console.log("moi" + details.name);
+
                 }
+                }
+                getDefaultValue={() => {
+                    return ''; // text input default value
+                }}
+                query={{
+                    // available options: https://developers.google.com/places/web-service/autocomplete
+                    key: ' AIzaSyDY6KpN2rzNeL-86blWwMeG0plkZlWVoi0 ',
+                    language: 'fi', // language of the results
+                    types: '(cities)' // default: 'geocode'
+                }}
+                styles={{
+                    description: {
+                        fontWeight: 'bold'
+                    },
+                    predefinedPlacesDescription: {
+                        color: '#1faadb'
+                    }
+                }}
 
-            }}
+                currentLocation={true} // Will add a 'Current location' button at the top of the predefined places list
+                currentLocationLabel="Current location"
+                nearbyPlacesAPI='GooglePlacesSearch' // Which API to use: GoogleReverseGeocoding or GooglePlacesSearch
+                GoogleReverseGeocodingQuery={{
+                    // available options for GoogleReverseGeocoding API : https://developers.google.com/maps/documentation/geocoding/intro
+                }}
+                GooglePlacesSearchQuery={{
+                    // available options for GooglePlacesSearch API : https://developers.google.com/places/web-service/search
+                    rankby: 'distance',
+                    types: 'food'
 
-            currentLocation={true} // Will add a 'Current location' button at the top of the predefined places list
-            currentLocationLabel="Current location"
-            nearbyPlacesAPI='GooglePlacesSearch' // Which API to use: GoogleReverseGeocoding or GooglePlacesSearch
-            GoogleReverseGeocodingQuery={{
-                // available options for GoogleReverseGeocoding API : https://developers.google.com/maps/documentation/geocoding/intro
-            }}
-            GooglePlacesSearchQuery={{
-                // available options for GooglePlacesSearch API : https://developers.google.com/places/web-service/search
-                rankby: 'distance',
-                types: 'food'
+                }}
 
-            }}
+                filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']} // filter the reverse geocoding results by types - ['locality', 'administrative_area_level_3'] if you want to display only cities
+                //  predefinedPlaces={[homePlace, workPlace]}
 
-            filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']} // filter the reverse geocoding results by types - ['locality', 'administrative_area_level_3'] if you want to display only cities
-          //  predefinedPlaces={[homePlace, workPlace]}
+                debounce={0} // debounce the requests in ms. Set to 0 to remove debounce. By default 0ms.
+                renderRightButton={() => <Text></Text>}
 
-            debounce={0} // debounce the requests in ms. Set to 0 to remove debounce. By default 0ms.
-            renderRightButton={() => <Text></Text>}
-
-        />
+            />
 
 
-) };
-    static latti = AsyncStorage.getItem('lattiAsync');
-    static longi = AsyncStorage.getItem('longiAsync');
+        ) };
+
 
 }
 

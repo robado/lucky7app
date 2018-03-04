@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import {
     Dimensions, Text, FlatList, View, Button, AppRegistry, StyleSheet, ListView,
-    TouchableOpacity
+    TouchableOpacity, AsyncStorage
 } from 'react-native';
 import MapView from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import MarkerCalloutDefault from '../components/MarkerCalloutDefault';
-import GooglePlacesInput from './AppPlaces';
-
 
 
 
@@ -19,42 +17,58 @@ const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 const GOOGLE_MAPS_APIKEY = ''; // syötä apikey tänne
 
+
 export class AppMap extends Component {
 
+
+    async componentWillMount(){
+
+        const setLat = AsyncStorage.getItem('lattiAsync');
+        await setLat;
+        const setLong = AsyncStorage.getItem('longiAsync');
+        await setLong;
+        this.state.coordinates[0].latitude = parseFloat(setLat._55);
+        this.state.coordinates[0].longitude = parseFloat(setLong._55);
+        this.forceUpdate();
+
+    }
+
     constructor(props) {
+
         super(props);
-
-
         this.state = {
             coordinates: [
                 {
-                    latitude: parseFloat(GooglePlacesInput.latti._55),
-                    longitude: parseFloat(GooglePlacesInput.longi._55),
+                    latitude: 61.2345,
+                    longitude: 26.3425,
                 },
                 {
                     latitude:  60.2933,
                     longitude: 25.040,
                 },
             ],
-
         };
 
         this.mapView = null;
     }
-    onMapPress = (e) => {
+
+    /*onMapPress = (e) => {
         this.setState({
             coordinates: [
                 ...this.state.coordinates,
                 e.nativeEvent.coordinate,
             ],
         });
-    };
+    };*/
 
     render() {
 
         return (
+
+
             <View style={[styles.container]}>
                 <MapView
+
                     initialRegion={{
                         latitude: LATITUDE,
                         longitude: LONGITUDE,
@@ -65,15 +79,15 @@ export class AppMap extends Component {
                     ref={c => this.mapView = c}
                     onPress={this.onMapPress}
                     showsUserLocation={true}
-                    followsUserLocation={true}
+                    followsUserLocation={false}
                     showsMyLocationButton={true}
                     customMapStyle={mapStyle}
                 >
                     {this.state.coordinates.map((coordinate, index) =>
                         <MapView.Marker key={`coordinate_${index}`} coordinate={coordinate} >
                             <MarkerCalloutDefault>
-                                <TouchableOpacity onPress={() => this.show()} style={[styles.bubble, styles.button]}>
-                                    <Text>Show</Text>
+                                <TouchableOpacity style={[styles.buttonContainer, styles.bubble]}>
+                                    <Text>moi</Text>
                                 </TouchableOpacity>
                             </MarkerCalloutDefault>
                         </MapView.Marker>
@@ -120,25 +134,22 @@ const styles = StyleSheet.create({
         ...StyleSheet.absoluteFillObject,
         justifyContent: 'flex-end',
         alignItems: 'center',
-        marginTop:50,
+        
 
     },
    map: {
         ...StyleSheet.absoluteFillObject,
+    },
 
-
-
+    latlng: {
+        width: 200,
+        alignItems: 'stretch',
     },
     bubble: {
         flex: 1,
         backgroundColor: 'rgba(255,255,255,0.7)',
-        paddingHorizontal: 18,
-        paddingVertical: 12,
-        borderRadius: 20,
-    },
-    latlng: {
-        width: 200,
-        alignItems: 'stretch',
+        paddingHorizontal: 1,
+        paddingVertical: 1,
     },
     button: {
         width: 80,
@@ -147,23 +158,11 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
     },
     buttonContainer: {
-        flexDirection: 'row',
-        marginVertical: 20,
-        backgroundColor: 'transparent',
+        flex: 1,
+        paddingHorizontal: 1,
+        paddingVertical: 1,
     },
-    View:{
-        marginLeft:5,
-        marginRight:1,
-        marginTop:24,
-        height:725,
 
-
-    },
-     MapView:{
-        flex:1,
-         //alignSelf: 'stretch',
-
-     },
 });
 
 
