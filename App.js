@@ -1,67 +1,86 @@
 import * as React from 'react';
 import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
 import { Dimensions, Text , FlatList, View, Button, AppRegistry, StyleSheet, ListView } from 'react-native';
-import {AppMap} from './src/components/appMap';
-import GooglePlacesInput from './src/components/AppPlaces';
-import AppJson from "./src/components/appJson";
+import {AppMap} from './src/screen/appMap';
+import GooglePlacesInput from './src/screen/AppPlaces';
+import AppJson from "./src/screen/appJson";
+import { NavigationComponent } from 'react-native-material-bottom-navigation';
+import { TabNavigator } from 'react-navigation';
+import Icon from "expo/src/Icon";
 
 
 
-const initialLayout = {
-    height: 0,
-    width: Dimensions.get('window').width,
-};
-
-export default class lucky7app extends React.Component {
-    state = {
-        index: 0,
-        routes: [
-            { key: 'FirstRoute', title: 'json' },
-            { key: 'SecondRoute', title: 'map' },
-            { key: 'ThirdRoute', title: 'places' },
-        ],
+class Json extends React.Component {
+    static navigationOptions = {
+        tabBar: {
+            label: 'Json',
+            icon: () => (<Icon size={24} color="white" name="json" />)
+        }
     };
 
-    _handleIndexChange = index => this.setState({ index });
-
-    _renderFooter = props => <TabBar {...props} />;
-
-
-
-    renderScene = ({ route }) => {
-        switch(route.key) {
-            case 'FirstRoute':
-                return <View style={[ styles.container, { backgroundColor: '#fff' } ]}><AppJson/></View>;
-            case 'SecondRoute':
-               // return <View style={[ styles.container, { backgroundColor: '#000' } ]}><AppMap/></View>;
-            case 'ThirdRoute':
-                return <View style={[ styles.container, { backgroundColor: '#401692'} ]} ><GooglePlacesInput/></View>;
-            default:
-                return null;
-        }
-    }
-
-    render() {
-        return (
-            <TabViewAnimated
-                style={styles.container}
-                navigationState={this.state}
-                renderScene={this.renderScene}
-                renderFooter={this._renderFooter}
-                onIndexChange={this._handleIndexChange}
-                initialLayout={initialLayout}
-
-            />
-        );
-    }
+    render() {   }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        marginTop:20,
-    },
-});
+class Places extends React.Component {
+    static navigationOptions = {
+        tabBar: {
+            label: 'Places',
+            icon: () => (<Icon size={24} color="white" name="places" />)
+        }
+    };
+
+    render() { }
+}
+
+class Map extends React.Component {
+    static navigationOptions = {
+        tabBar: {
+            label: 'Map',
+            icon: () => (<Icon size={24} color="white" name="map" />)
+        }
+    };
+
+    render() { }
+}
+
+const Navigation = TabNavigator({
+    Json: { screen: AppJson },
+    Places: { screen: GooglePlacesInput },
+    Map: { screen: AppMap },
+}, {
+    tabBarComponent: NavigationComponent,
+    tabBarPosition: 'top',
+    animationEnabled: false,
+    swipeEnabled: true,
+    tabBarOptions: {
+        bottomNavigationOptions: {
+            labelColor: 'white',
+            rippleColor: 'white',
+            tabs: {
+                Json: {
+                    barBackgroundColor: '#37474F'
+                },
+                Places: {
+                    barBackgroundColor: '#00796B'
+                },
+                Map: {
+                    barBackgroundColor: '#37474f',
+
+                }
+            }
+        }
+    }
+})
+
+export default class lucky7app extends React.Component{
+       render() {
+              return (
+                        <Navigation/>
+
+                  )
+                }
+}
+
 
 
 AppRegistry.registerComponent('lucky7app',()=> 'lucky7app');

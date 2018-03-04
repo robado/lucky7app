@@ -5,8 +5,9 @@ import {
 } from 'react-native';
 import MapView from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
-import MarkerCalloutDefault from './MarkerCalloutDefault';
+import MarkerCalloutDefault from '../components/MarkerCalloutDefault';
 import GooglePlacesInput from './AppPlaces';
+
 
 
 
@@ -52,7 +53,7 @@ export class AppMap extends Component {
     render() {
 
         return (
-            <View>
+            <View style={[styles.container]}>
                 <MapView
                     initialRegion={{
                         latitude: LATITUDE,
@@ -60,7 +61,7 @@ export class AppMap extends Component {
                         latitudeDelta: LATITUDE_DELTA,
                         longitudeDelta: LONGITUDE_DELTA,
                     }}
-                    style={{ alignSelf: 'stretch', paddingBottom: 100, height: '90%', }}
+                    style={ styles.map}
                     ref={c => this.mapView = c}
                     onPress={this.onMapPress}
                     showsUserLocation={true}
@@ -119,10 +120,15 @@ const styles = StyleSheet.create({
         ...StyleSheet.absoluteFillObject,
         justifyContent: 'flex-end',
         alignItems: 'center',
+        marginTop:50,
+
     },
-  /* map: {
+   map: {
         ...StyleSheet.absoluteFillObject,
-    }*/
+
+
+
+    },
     bubble: {
         flex: 1,
         backgroundColor: 'rgba(255,255,255,0.7)',
@@ -145,7 +151,19 @@ const styles = StyleSheet.create({
         marginVertical: 20,
         backgroundColor: 'transparent',
     },
+    View:{
+        marginLeft:5,
+        marginRight:1,
+        marginTop:24,
+        height:725,
+
+
+    },
+     MapView:{
+        flex:1,
+         //alignSelf: 'stretch',
+
+     },
 });
 
-module.export = AppMap;
 

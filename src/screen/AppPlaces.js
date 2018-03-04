@@ -14,6 +14,7 @@ render(){
     return (
 
         <GooglePlacesAutocomplete
+            style={{marginTop:100,}}
             placeholder='Search'
             minLength={2} // minimum length of text to search
             autoFocus={true}
@@ -51,6 +52,7 @@ render(){
                 predefinedPlacesDescription: {
                     color: '#1faadb'
                 }
+
             }}
 
             currentLocation={true} // Will add a 'Current location' button at the top of the predefined places list
