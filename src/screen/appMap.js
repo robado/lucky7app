@@ -6,6 +6,8 @@ import {
 import MapView from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import MarkerCalloutDefault from '../components/MarkerCalloutDefault';
+import { TabNavigator } from 'react-navigation';
+import reset from "expo/src/Segment";
 
 
 
@@ -19,6 +21,7 @@ const GOOGLE_MAPS_APIKEY = ''; // syötä apikey tänne
 
 
 export class AppMap extends Component {
+
 
 
     async componentWillMount(){
@@ -60,6 +63,9 @@ export class AppMap extends Component {
             ],
         });
     };*/
+    onMapPress = () => {
+
+    };
 
     render() {
 
@@ -92,29 +98,13 @@ export class AppMap extends Component {
                             </MarkerCalloutDefault>
                         </MapView.Marker>
                     )}
-                    {(this.state.coordinates.length >= 2) && (
-                        <MapViewDirections
-                            origin={this.state.coordinates[0]}
-                            waypoints={ (this.state.coordinates.length > 2) ? this.state.coordinates.slice(1, -1): null}
-                            destination={this.state.coordinates[this.state.coordinates.length-1]}
-                            apikey={GOOGLE_MAPS_APIKEY}
-                            strokeWidth={3}
-                            strokeColor="hotpink"
-                            onReady={(result) => {
-                                this.mapView.fitToCoordinates(result.coordinates, {
-                                    edgePadding: {
-                                        right: (width / 20),
-                                        bottom: (height / 20),
-                                        left: (width / 20),
-                                        top: (height / 20),
-                                    }
-                                });
-                            }}
-                            onError={(errorMessage) => {
-                                // console.log('GOT AN ERROR');
-                            }}
-                        />
-                    )}
+                    <MapViewDirections
+                        origin={this.state.coordinates[0]}
+                        destination={this.state.coordinates[1]}
+                        apikey={GOOGLE_MAPS_APIKEY}
+                        strokeWidth={3}
+                        strokeColor="hotpink"
+                    />
                 </MapView>
             </View>
         );
@@ -126,24 +116,29 @@ const styles = StyleSheet.create({
     customView: {
         width: 140,
         height: 100,
+        flex: 1,
     },
     plainView: {
         width: 60,
+        flex:1,
     },
     container: {
         ...StyleSheet.absoluteFillObject,
         justifyContent: 'flex-end',
         alignItems: 'center',
-        
+        flex: 1,
+
 
     },
    map: {
+        flex: 1,
         ...StyleSheet.absoluteFillObject,
     },
 
     latlng: {
         width: 200,
         alignItems: 'stretch',
+        flex:1,
     },
     bubble: {
         flex: 1,
@@ -156,6 +151,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 12,
         alignItems: 'center',
         marginHorizontal: 10,
+        flex: 1,
     },
     buttonContainer: {
         flex: 1,
