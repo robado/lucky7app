@@ -10,10 +10,12 @@ import Icon from "expo/src/Icon";
 
 
 
+
 class Json extends React.Component {
     static navigationOptions = {
         tabBar: {
             label: 'Json',
+
             icon: () => (<Icon size={24} color="white" name="json" />)
         }
     };
@@ -44,9 +46,10 @@ class Map extends React.Component {
 }
 
 const Navigation = TabNavigator({
-    Json: { screen: AppJson },
-    Places: { screen: GooglePlacesInput },
-    Map: { screen: AppMap },
+
+        Places: { screen: GooglePlacesInput },
+        Map: { screen: AppMap },
+        Json: { screen: AppJson },
 }, {
     tabBarComponent: NavigationComponent,
     tabBarPosition: 'top',
@@ -54,6 +57,7 @@ const Navigation = TabNavigator({
     swipeEnabled: true,
     tabBarOptions: {
         bottomNavigationOptions: {
+            backBehavior: "initialRoute" ,
             labelColor: 'white',
             rippleColor: 'white',
             tabs: {
@@ -70,7 +74,8 @@ const Navigation = TabNavigator({
             }
         }
     }
-})
+}
+);
 
 export default class lucky7app extends React.Component{
        render() {
