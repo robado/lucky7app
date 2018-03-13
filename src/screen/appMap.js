@@ -22,17 +22,23 @@ export class AppMap extends Component {
 
 
     async componentWillMount(){
+        //hakee aync storagesta latituden joka on setattu AppPlaces sivulla
         const setLat = AsyncStorage.getItem('lattiAsync');
         await setLat;
+        //hakee async storagesta longituden
         const setLong = AsyncStorage.getItem('longiAsync');
         await setLong;
+        //laittaa haetut tiedot this.stateen ensimmäisen coordinates arrayn objektiin joka on kohde piste
         this.state.coordinates[0].latitude = parseFloat(setLat._55);
         this.state.coordinates[0].longitude = parseFloat(setLong._55);
-
+        //hakee react nativen omalla geolocation funktiolla current positionin
         let location = await Location.getCurrentPositionAsync({});
+        //cloonataan alkuperäinen coordinates arraylist statesta ja kaikki sen sisältämät arvot
         let original = [...this.state.coordinates];
+        //valitaan arraylistin cloonista toinen coordinates arrayn objekti, joka on lähtöpiste
         original[1] = {latitude: JSON.parse(location.coords.latitude),
                         longitude: JSON.parse(location.coords.longitude)};
+        //laitetaan muutettu kopio coordinates arraylististä alkuperäisen tilalle
         this.setState({coordinates: original});
         this.forceUpdate();
 
@@ -44,8 +50,6 @@ export class AppMap extends Component {
 
         super(props);
         this.state = {
-            locationResultLatitude: null,
-            locationResultLongitude: null,
             coordinates: [
                 {
                     latitude: 61.2345,
@@ -77,6 +81,7 @@ export class AppMap extends Component {
 
 
             <View style={[styles.container]}>
+                /*täällä on kartan asetukset */
                 <MapView
 
                     initialRegion={{
@@ -92,6 +97,7 @@ export class AppMap extends Component {
                     showsMyLocationButton={true}
                     customMapStyle={mapStyle}
                 >
+                    /*täällä on kartan markkereiden asetukset */
                     {this.state.coordinates.map((coordinate, index) =>
                         <MapView.Marker key={`coordinate_${index}`} coordinate={coordinate} >
                             <MarkerCalloutDefault>
@@ -101,6 +107,7 @@ export class AppMap extends Component {
                             </MarkerCalloutDefault>
                         </MapView.Marker>
                     )}
+                    /*täällä on kartan directions asetukset */
                     <MapViewDirections
                         origin={this.state.coordinates[1]}
                         destination={this.state.coordinates[0]}
