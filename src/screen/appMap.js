@@ -6,9 +6,7 @@ import {
 import MapView from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import MarkerCalloutDefault from '../components/MarkerCalloutDefault';
-import { TabNavigator } from 'react-navigation';
-import reset from "expo/src/Segment";
-
+import { Constants, Location, Permissions } from 'expo';
 
 
 const { width, height } = Dimensions.get('window');
@@ -23,23 +21,31 @@ const GOOGLE_MAPS_APIKEY = ''; // syötä apikey tänne
 export class AppMap extends Component {
 
 
-
     async componentWillMount(){
-
         const setLat = AsyncStorage.getItem('lattiAsync');
         await setLat;
         const setLong = AsyncStorage.getItem('longiAsync');
         await setLong;
         this.state.coordinates[0].latitude = parseFloat(setLat._55);
         this.state.coordinates[0].longitude = parseFloat(setLong._55);
+
+        let location = await Location.getCurrentPositionAsync({});
+        let original = [...this.state.coordinates];
+        original[1] = {latitude: JSON.parse(location.coords.latitude),
+                        longitude: JSON.parse(location.coords.longitude)};
+        this.setState({coordinates: original});
         this.forceUpdate();
 
+
     }
+
 
     constructor(props) {
 
         super(props);
         this.state = {
+            locationResultLatitude: null,
+            locationResultLongitude: null,
             coordinates: [
                 {
                     latitude: 61.2345,
@@ -52,7 +58,6 @@ export class AppMap extends Component {
             ],
         };
 
-        this.mapView = null;
     }
 
     /*onMapPress = (e) => {
@@ -68,7 +73,6 @@ export class AppMap extends Component {
     };
 
     render() {
-
         return (
 
 
@@ -82,7 +86,6 @@ export class AppMap extends Component {
                         longitudeDelta: LONGITUDE_DELTA,
                     }}
                     style={ styles.map}
-                    ref={c => this.mapView = c}
                     onPress={this.onMapPress}
                     showsUserLocation={true}
                     followsUserLocation={false}
@@ -99,8 +102,8 @@ export class AppMap extends Component {
                         </MapView.Marker>
                     )}
                     <MapViewDirections
-                        origin={this.state.coordinates[0]}
-                        destination={this.state.coordinates[1]}
+                        origin={this.state.coordinates[1]}
+                        destination={this.state.coordinates[0]}
                         apikey={GOOGLE_MAPS_APIKEY}
                         strokeWidth={3}
                         strokeColor="hotpink"
