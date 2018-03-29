@@ -25,7 +25,7 @@ export default class AppCamera extends Component {
     render() {
 
         return <View>
-            <Image style={{bottom: bottom, width: Dimensions.get('window').width, height: Dimensions.get('window').height, resizeMode: 'contain'}} source={{uri: 'https://weathercam.digitraffic.fi/' + this.state.imgId + '.jpg'}}/>
+            <Image style={{bottom: bottom, width: Dimensions.get('window').width, height: Dimensions.get('window').height, resizeMode: 'contain'}} source={{uri: 'https://weathercam.digitraffic.fi/' + this.state.imgId + '.jpg' + '?' + new Date()}}/>
         </View>;
     }
 }
