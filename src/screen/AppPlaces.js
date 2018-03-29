@@ -1,24 +1,27 @@
 import React, {Component} from 'react';
 import {View, Image, Text, AsyncStorage} from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
-import {AppMap} from "./appMap";
-import { TabNavigator } from 'react-navigation';
-import App from "../../App";
-
+import { BackHandler } from 'react-native';
+import Permissions from "expo";
 //const homePlace = { description: 'Home', geometry: { location: { lat: 48.8152937, lng: 2.4597668 } }};
 //const workPlace = { description: 'Work', geometry: { location: { lat: 48.8496818, lng: 2.2940881 } }};
 
 
+
 export class GooglePlacesInput extends Component {
 
+   async componentDidMount() {
+       const permissionStatus = Expo.Permissions.getAsync(Expo.Permissions.LOCATION);
+       if (permissionStatus !== 'granted') {
+           alert(
+               'Laita GPS päälle',
+           );
+   }
 
+    }
     render(){
 
-
-
-
         return (
-
             <GooglePlacesAutocomplete
                 placeholder='Search'
                 minLength={2} // minimum length of text to search
@@ -34,13 +37,8 @@ export class GooglePlacesInput extends Component {
 
                     AsyncStorage.setItem('lattiAsync', details.geometry.location.lat.toString());
                     AsyncStorage.setItem('longiAsync', details.geometry.location.lng.toString());
-                    //this.latti = data.geometry.location.lat;
-                    //this.longi = data.geometry.location.lng;
                     console.log("oikea latitude" + details.geometry.location.lat);
                     console.log("oikea longitude" + details.geometry.location.lng);
-                    /* console.log(GooglePlacesInput.latti);
-                     console.log(GooglePlacesInput.longi);
-                     console.log(GooglePlacesInput.kaupunki);*/
 
                     console.log("moi" + details.name);
 
