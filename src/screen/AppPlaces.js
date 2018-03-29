@@ -41,7 +41,7 @@ export class GooglePlacesInput extends Component {
                     console.log("oikea longitude" + details.geometry.location.lng);
 
                     console.log("moi" + details.name);
-
+                    this.props.navigation.navigate('Map');
 
 
                 }

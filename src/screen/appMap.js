@@ -22,6 +22,7 @@ export class AppMap extends Component {
 
 
     async componentWillMount(){
+                            //Matkan pisteiden asettaminen
         //hakee aync storagesta latituden joka on setattu AppPlaces sivulla
         const setLat = AsyncStorage.getItem('lattiAsync');
         await setLat;
@@ -40,6 +41,21 @@ export class AppMap extends Component {
                         longitude: JSON.parse(location.coords.longitude)};
         //laitetaan muutettu kopio coordinates arraylististä alkuperäisen tilalle
         this.setState({coordinates: original});
+
+                            // asemien kordinaattien asettaminen
+        await fetch('https://tie.digitraffic.fi/api/v1/metadata/camera-stations')
+            .then((response) => response.json())
+            .then((responseData) => {
+
+                let featuresIndex = 6;
+                let original2 = [...this.state.coordinates2];
+                original2[0] = { latitude: responseData.features[featuresIndex].geometry.coordinates[1],
+                    longitude: responseData.features[featuresIndex].geometry.coordinates[0]};
+                this.setState({coordinates2: original2});
+                console.log(this.state.coordinates2[0].longitude);
+                console.log(this.state.coordinates2[0].latitude);
+            });
+
         this.forceUpdate();
 
 
@@ -115,7 +131,7 @@ export class AppMap extends Component {
                     {this.state.coordinates2.map((coordinate, index) =>
                         <MapView.Marker key={`coordinate_${index}`} coordinate={coordinate} >
                             <MarkerCalloutDefault>
-                                <TouchableOpacity style={[styles.buttonContainer2, styles.bubble]}>
+                                <TouchableOpacity style={[styles.buttonContainer, styles.bubble]}>
                                     <Text>hei</Text>
                                 </TouchableOpacity>
                             </MarkerCalloutDefault>
