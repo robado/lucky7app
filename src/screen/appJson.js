@@ -5,6 +5,9 @@ import AppWeather from "../components/appWeather";
 import AppCamera from "../components/appCamera";
 import {AppMap} from "./appMap";
 export default class AppJson extends Component {
+    componentDidMount(){
+        this.forceUpdate();
+    }
 
     render(){
         return(

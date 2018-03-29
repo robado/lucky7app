@@ -6,7 +6,7 @@ import {
 import MapView from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import MarkerCalloutDefault from '../components/MarkerCalloutDefault';
-import { Constants, Location, Permissions } from 'expo';
+import { Location} from 'expo';
 
 
 const { width, height } = Dimensions.get('window');
@@ -59,6 +59,13 @@ export class AppMap extends Component {
                     latitude:  60.2933,
                     longitude: 25.040,
                 },
+
+            ],
+            coordinates2: [
+                {
+                    latitude:  61.2933,
+                    longitude: 25.040,
+                },
             ],
         };
 
@@ -71,17 +78,16 @@ export class AppMap extends Component {
                 e.nativeEvent.coordinate,
             ],
         });
-    };*/
+    };
     onMapPress = () => {
 
     };
-
+*/
     render() {
         return (
 
 
             <View style={[styles.container]}>
-                /*täällä on kartan asetukset */
                 <MapView
 
                     initialRegion={{
@@ -97,7 +103,6 @@ export class AppMap extends Component {
                     showsMyLocationButton={true}
                     customMapStyle={mapStyle}
                 >
-                    /*täällä on kartan markkereiden asetukset */
                     {this.state.coordinates.map((coordinate, index) =>
                         <MapView.Marker key={`coordinate_${index}`} coordinate={coordinate} >
                             <MarkerCalloutDefault>
@@ -107,7 +112,15 @@ export class AppMap extends Component {
                             </MarkerCalloutDefault>
                         </MapView.Marker>
                     )}
-                    /*täällä on kartan directions asetukset */
+                    {this.state.coordinates2.map((coordinate, index) =>
+                        <MapView.Marker key={`coordinate_${index}`} coordinate={coordinate} >
+                            <MarkerCalloutDefault>
+                                <TouchableOpacity style={[styles.buttonContainer2, styles.bubble]}>
+                                    <Text>hei</Text>
+                                </TouchableOpacity>
+                            </MarkerCalloutDefault>
+                        </MapView.Marker>
+                    )}
                     <MapViewDirections
                         origin={this.state.coordinates[1]}
                         destination={this.state.coordinates[0]}
@@ -167,6 +180,11 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingHorizontal: 1,
         paddingVertical: 1,
+    },
+    buttonContainer2: {
+        flex: 1,
+        paddingHorizontal: 5,
+        paddingVertical: 5,
     },
 
 });
