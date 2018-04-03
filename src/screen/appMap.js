@@ -46,14 +46,25 @@ export class AppMap extends Component {
         await fetch('https://tie.digitraffic.fi/api/v1/metadata/camera-stations')
             .then((response) => response.json())
             .then((responseData) => {
-
-                let featuresIndex = 6;
+                console.log(responseData.features.length);
                 let original2 = [...this.state.coordinates2];
-                original2[0] = { latitude: responseData.features[featuresIndex].geometry.coordinates[1],
-                    longitude: responseData.features[featuresIndex].geometry.coordinates[0]};
-                this.setState({coordinates2: original2});
-                console.log(this.state.coordinates2[0].longitude);
-                console.log(this.state.coordinates2[0].latitude);
+                for (let i = 0; i < 200; i++) {
+                    original2[i] = { latitude: responseData.features[i].geometry.coordinates[1],
+                        longitude: responseData.features[i].geometry.coordinates[0]};
+                    this.setState({coordinates2: original2});
+                    console.log(i + ": " + this.state.coordinates2[i].longitude + ", " + this.state.coordinates2[i].latitude);
+                }
+            });
+        await fetch('https://tie.digitraffic.fi/api/v1/metadata/camera-stations')
+            .then((response) => response.json())
+                .then((responseData) => {
+                let original2 = [...this.state.coordinates2];
+                for (let i = 200; i < 400; i++) {
+                    original2[i] = { latitude: responseData.features[i].geometry.coordinates[1],
+                        longitude: responseData.features[i].geometry.coordinates[0]};
+                    this.setState({coordinates2: original2});
+                    console.log(i + ": " + this.state.coordinates2[i].longitude + ", " + this.state.coordinates2[i].latitude);
+                }
             });
 
         this.forceUpdate();
@@ -129,12 +140,9 @@ export class AppMap extends Component {
                         </MapView.Marker>
                     )}
                     {this.state.coordinates2.map((coordinate, index) =>
-                        <MapView.Marker key={`coordinate_${index}`} coordinate={coordinate} >
-                            <MarkerCalloutDefault>
-                                <TouchableOpacity style={[styles.buttonContainer, styles.bubble]}>
-                                    <Text>hei</Text>
-                                </TouchableOpacity>
-                            </MarkerCalloutDefault>
+                        <MapView.Marker key={`coordinate_${index}`} coordinate={coordinate}
+                                        image={require('../assets/img/camera.bmp')}>
+
                         </MapView.Marker>
                     )}
                     <MapViewDirections
