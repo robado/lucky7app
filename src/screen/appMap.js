@@ -45,25 +45,30 @@ export class AppMap extends Component {
                             // asemien kordinaattien asettaminen
         await fetch('https://tie.digitraffic.fi/api/v1/metadata/camera-stations')
             .then((response) => response.json())
-            .then((responseData) => {
-                console.log(responseData.features.length);
-                let original2 = [...this.state.coordinates2];
-                for (let i = 0; i < 200; i++) {
-                    original2[i] = { latitude: responseData.features[i].geometry.coordinates[1],
-                        longitude: responseData.features[i].geometry.coordinates[0]};
-                    this.setState({coordinates2: original2});
-                    console.log(i + ": " + this.state.coordinates2[i].longitude + ", " + this.state.coordinates2[i].latitude);
-                }
-            });
-        await fetch('https://tie.digitraffic.fi/api/v1/metadata/camera-stations')
-            .then((response) => response.json())
                 .then((responseData) => {
                 let original2 = [...this.state.coordinates2];
-                for (let i = 200; i < 400; i++) {
-                    original2[i] = { latitude: responseData.features[i].geometry.coordinates[1],
-                        longitude: responseData.features[i].geometry.coordinates[0]};
+                for (let i = 0; i < 50; i++) {
+                        let e = 0;
+                        original2[i] = { latitude: responseData.features[i].geometry.coordinates[1],
+                            longitude: responseData.features[i].geometry.coordinates[0]};
+                        for (let x = 0; x <= 100; x++){
+                            let waypointsvaluelat = Math.round(this.state.waypoints[x].latitude *100)/100;
+                            let waypointsvaluelng = Math.round(this.state.waypoints[x].longitude *100)/100;
+                            let coordinatesvaluelat = Math.round(original2[i].latitude *100)/100;
+                            let coordinatesvaluelng = Math.round(original2[i].longitude *100)/100;
+                            if (waypointsvaluelat === coordinatesvaluelat && waypointsvaluelng === coordinatesvaluelng){
+                                console.log("cool and good", "number: " + i,"coordinates: " + Math.round(responseData.features[i].geometry.coordinates[1]*100)/100,
+                                    Math.round(responseData.features[i].geometry.coordinates[0]*100)/100);
+
+                            } else if (e < 1) {
+                                e++;
+                                console.log("lets slice ", "number: " + i,"coordinates: " + Math.round(original2[i].latitude*100)/100, Math.round( original2[i].longitude*100)/100 );
+                            }
+
+                        }
+                    console.log("done");
+
                     this.setState({coordinates2: original2});
-                    console.log(i + ": " + this.state.coordinates2[i].longitude + ", " + this.state.coordinates2[i].latitude);
                 }
             });
 
@@ -93,6 +98,13 @@ export class AppMap extends Component {
                     latitude:  61.2933,
                     longitude: 25.040,
                 },
+
+            ],
+            waypoints: [
+                {
+                    latitude:  Number,
+                    longitude: Number,
+                },
             ],
         };
 
@@ -111,6 +123,7 @@ export class AppMap extends Component {
     };
 */
     render() {
+
         return (
 
 
@@ -151,6 +164,15 @@ export class AppMap extends Component {
                         apikey={GOOGLE_MAPS_APIKEY}
                         strokeWidth={3}
                         strokeColor="hotpink"
+                        onReady={(params) => {
+                            for (let i = 0; i < params.coordinates.length; i++) {
+                                let original3 = [...this.state.waypoints];
+                                original3[i] = { latitude: params.coordinates[i].latitude,
+                                    longitude: params.coordinates[i].longitude};
+                                this.setState({waypoints: original3});
+                            }
+                            console.log(this.state.waypoints);
+                        }}
                     />
                 </MapView>
             </View>
