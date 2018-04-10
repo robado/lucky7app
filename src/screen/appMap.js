@@ -7,7 +7,7 @@ import MapView from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import MarkerCalloutDefault from '../components/MarkerCalloutDefault';
 import { Location} from 'expo';
-
+import geolib from "geolib";
 
 const { width, height } = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
@@ -43,32 +43,33 @@ export class AppMap extends Component {
         this.setState({coordinates: original});
 
                             // asemien kordinaattien asettaminen
+        let waypoints = this.state.waypoints.length;
         await fetch('https://tie.digitraffic.fi/api/v1/metadata/camera-stations')
             .then((response) => response.json())
                 .then((responseData) => {
-                let original2 = [...this.state.coordinates2];
-                for (let i = 0; i < 50; i++) {
-                        let e = 0;
+                    let cameralenght = responseData.features.length;
+                    let original2 = [...this.state.coordinates2];
+                    let filtered = [];
+                for (let i = 0; i < cameralenght; i++) {
                         original2[i] = { latitude: responseData.features[i].geometry.coordinates[1],
                             longitude: responseData.features[i].geometry.coordinates[0]};
-                        for (let x = 0; x <= 100; x++){
-                            let waypointsvaluelat = Math.round(this.state.waypoints[x].latitude *100)/100;
-                            let waypointsvaluelng = Math.round(this.state.waypoints[x].longitude *100)/100;
-                            let coordinatesvaluelat = Math.round(original2[i].latitude *100)/100;
-                            let coordinatesvaluelng = Math.round(original2[i].longitude *100)/100;
-                            if (waypointsvaluelat === coordinatesvaluelat && waypointsvaluelng === coordinatesvaluelng){
+                        for (let x = 0; x <= waypoints; x++){
+                            let geodistance = geolib.getDistance(
+                                {latitude: original2[i].latitude, longitude: original2[i].longitude},
+                                {latitude: this.state.waypoints[x].latitude, longitude: this.state.waypoints[x].longitude}
+                            );
+                            if (geodistance <= 1000){
                                 console.log("cool and good", "number: " + i,"coordinates: " + Math.round(responseData.features[i].geometry.coordinates[1]*100)/100,
                                     Math.round(responseData.features[i].geometry.coordinates[0]*100)/100);
-
-                            } else if (e < 1) {
-                                e++;
-                                console.log("lets slice ", "number: " + i,"coordinates: " + Math.round(original2[i].latitude*100)/100, Math.round( original2[i].longitude*100)/100 );
+                                console.log("distance COOL: ", geodistance);
+                                filtered[i] = { latitude: original2[i].latitude, longitude: original2[i].longitude
+                                };
+                                console.log("filtered: ",filtered[i].longitude,filtered[i].latitude);
+                                break
                             }
-
                         }
-                    console.log("done");
-
-                    this.setState({coordinates2: original2});
+                    console.log("done, waypoints: ", waypoints);
+                    this.setState({coordinates2: filtered});
                 }
             });
 
@@ -123,6 +124,8 @@ export class AppMap extends Component {
     };
 */
     render() {
+        let waypoints = this.state.waypoints.length;
+        console.log("da way: ",waypoints);
 
         return (
 
@@ -145,11 +148,7 @@ export class AppMap extends Component {
                 >
                     {this.state.coordinates.map((coordinate, index) =>
                         <MapView.Marker key={`coordinate_${index}`} coordinate={coordinate} >
-                            <MarkerCalloutDefault>
-                                <TouchableOpacity style={[styles.buttonContainer, styles.bubble]}>
-                                    <Text>moi</Text>
-                                </TouchableOpacity>
-                            </MarkerCalloutDefault>
+
                         </MapView.Marker>
                     )}
                     {this.state.coordinates2.map((coordinate, index) =>
