@@ -8,6 +8,10 @@ import MapViewDirections from 'react-native-maps-directions';
 import MarkerCalloutDefault from '../components/MarkerCalloutDefault';
 import { Location} from 'expo';
 import geolib from "geolib";
+import { NavigationActions } from 'react-navigation';
+import appJson from "./appJson";
+import appCamera from "../components/appCamera";
+import _ from "lodash";
 
 const { width, height } = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
@@ -19,7 +23,6 @@ const GOOGLE_MAPS_APIKEY = ''; // syötä apikey tänne
 
 
 export class AppMap extends Component {
-
 
     async componentWillMount(){
                             //Matkan pisteiden asettaminen
@@ -47,30 +50,55 @@ export class AppMap extends Component {
         await fetch('https://tie.digitraffic.fi/api/v1/metadata/camera-stations')
             .then((response) => response.json())
                 .then((responseData) => {
-                    let cameralenght = responseData.features.length;
+                    //asetetaan kameroiden arraylistin pituus muuttujaksi
+                    let cameralength = responseData.features.length;
+                    //kloonataan original2 array lista
                     let original2 = [...this.state.coordinates2];
+                    //asetetaan arraylist, joka tulee sisältämään kaikki tiellä olevat kamerat
                     let filtered = [];
-                for (let i = 0; i < cameralenght; i++) {
-                        original2[i] = { latitude: responseData.features[i].geometry.coordinates[1],
-                            longitude: responseData.features[i].geometry.coordinates[0]};
+                    //asetetaan latitude ja longitude arraylistaat waypoint-arraylistan objektien arvoista
+                    let latitudes = this.state.waypoints.map((point) => point.latitude);
+                    let longitudes = this.state.waypoints.map((point) => point.longitude);
+                    //asetetaan boundcameras, minkä tarkoituksena on rajata vertailualgoritmin kokoa
+                    let boundcameras = [];
+                    //for-lause, joka katsoo, onko kamera tiettyjen koordinaattien muodostamassa neliössä
+                    //jos on, niin se lisää koordinaatin bouncameras -arraylistaan
+                    //jos ei, ei tee mitään
+                    console.log("lat min ja max: ",_.min(latitudes), _.max(latitudes));
+                    console.log("lon min ja max: ",_.min(longitudes), _.max(longitudes));
+                    for (let j = 0; j < cameralength; j++){
+                        original2[j] = { latitude: responseData.features[j].geometry.coordinates[1],
+                            longitude: responseData.features[j].geometry.coordinates[0]};
+                        if (original2[j].latitude > _.min(latitudes) && original2[j].latitude < _.max(latitudes) && original2[j].longitude > _.min(longitudes) && original2[j].longitude < _.max(longitudes)) {
+                                console.log("lisätään boundcameraan: ",original2[j].latitude, original2[j].longitude );
+                                boundcameras.push({latitude: original2[j].latitude, longitude: original2[j].longitude});
+                        }
+                    }
+                    //for-lause, jossa verrataan kameroita piirrettyyn reittiin. Käytetään boundcameras-arraylistaa, joka
+                    //setattiin aikaisemmassa algoritmissa aikavaativuuksien vuoksi
+                    for (let i = 0; i < boundcameras.length; i++) {
                         for (let x = 0; x <= waypoints; x++){
                             let geodistance = geolib.getDistance(
-                                {latitude: original2[i].latitude, longitude: original2[i].longitude},
+                                {latitude: boundcameras[i].latitude, longitude: boundcameras[i].longitude},
                                 {latitude: this.state.waypoints[x].latitude, longitude: this.state.waypoints[x].longitude}
                             );
+                            //katsoo onko kamera tietyn matkan päässä waypointista
+                            //jos kamera on, se lisää ne filtered listaaan
+                            //jos ei ole, se ei tee mitään
                             if (geodistance <= 1000){
                                 console.log("cool and good", "number: " + i,"coordinates: " + Math.round(responseData.features[i].geometry.coordinates[1]*100)/100,
                                     Math.round(responseData.features[i].geometry.coordinates[0]*100)/100);
                                 console.log("distance COOL: ", geodistance);
-                                filtered[i] = { latitude: original2[i].latitude, longitude: original2[i].longitude
-                                };
-                                console.log("filtered: ",filtered[i].longitude,filtered[i].latitude);
+                                filtered.push({ latitude: boundcameras[i].latitude, longitude: boundcameras[i].longitude});
                                 break
                             }
                         }
                     console.log("done, waypoints: ", waypoints);
                     this.setState({coordinates2: filtered});
+
+
                 }
+                    console.log(this.state.cameras);
             });
 
         this.forceUpdate();
@@ -101,6 +129,7 @@ export class AppMap extends Component {
                 },
 
             ],
+
             waypoints: [
                 {
                     latitude:  Number,
@@ -124,15 +153,13 @@ export class AppMap extends Component {
     };
 */
     render() {
+
         let waypoints = this.state.waypoints.length;
         console.log("da way: ",waypoints);
 
         return (
-
-
             <View style={[styles.container]}>
                 <MapView
-
                     initialRegion={{
                         latitude: LATITUDE,
                         longitude: LONGITUDE,
@@ -153,8 +180,12 @@ export class AppMap extends Component {
                     )}
                     {this.state.coordinates2.map((coordinate, index) =>
                         <MapView.Marker key={`coordinate_${index}`} coordinate={coordinate}
-                                        image={require('../assets/img/camera.bmp')}>
+                                        image={require('../assets/img/camera.bmp')}
+                                        title = {`${coordinate.latitude}`}
+                                        onPress={() =>  {
+                                            this.props.navigation.navigate("Json", {location: coordinate});
 
+                                        }}>
                         </MapView.Marker>
                     )}
                     <MapViewDirections
@@ -174,8 +205,21 @@ export class AppMap extends Component {
                         }}
                     />
                 </MapView>
+                <Button
+                    onPress={() =>  {
+                        console.log("nappi");
+
+                        //this.props.navigation.navigate("Places");
+                            update();
+
+                    }}
+                    title="Päivitä"
+                    accessibilityLabel="Learn more about this purple button"
+                />
             </View>
         );
+
+
     }
 
 }

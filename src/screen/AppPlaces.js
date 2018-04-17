@@ -3,6 +3,7 @@ import {View, Image, Text, AsyncStorage} from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { BackHandler } from 'react-native';
 import Permissions from "expo";
+import {AppMap} from "./appMap";
 //const homePlace = { description: 'Home', geometry: { location: { lat: 48.8152937, lng: 2.4597668 } }};
 //const workPlace = { description: 'Work', geometry: { location: { lat: 48.8496818, lng: 2.2940881 } }};
 
@@ -31,21 +32,11 @@ export class GooglePlacesInput extends Component {
                 fetchDetails={true}
                 renderDescription={(row) => row.description} // custom description render
                 onPress={(data, details = null) =>  {   // 'details' is provided when fetchDetails = true
-                    //console.log(data);
-
-                    // AsyncStorage.setItem('kaupunkiAsync', details.name);
-
                     AsyncStorage.setItem('lattiAsync', details.geometry.location.lat.toString());
                     AsyncStorage.setItem('longiAsync', details.geometry.location.lng.toString());
-                    console.log("oikea latitude" + details.geometry.location.lat);
-                    console.log("oikea longitude" + details.geometry.location.lng);
-
-                    console.log("moi" + details.name);
                     this.props.navigation.navigate('Map');
 
-
-                }
-                }
+                }}
                 getDefaultValue={() => {
                     return ''; // text input default value
                 }}

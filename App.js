@@ -5,7 +5,8 @@ import {AppMap} from './src/screen/appMap';
 import GooglePlacesInput from './src/screen/AppPlaces';
 import AppJson from "./src/screen/appJson";
 import { NavigationComponent } from 'react-native-material-bottom-navigation';
-import { TabNavigator } from 'react-navigation';
+import { TabNavigator, NavigationActions } from 'react-navigation';
+
 import Icon from "expo/src/Icon";
 
 

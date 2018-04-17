@@ -3,11 +3,13 @@ import {Text, View, FlatList, ScrollView} from 'react-native';
 import AppJsondata from "../components/appJsondata";
 import AppWeather from "../components/appWeather";
 import AppCamera from "../components/appCamera";
-import {AppMap} from "./appMap";
 export default class AppJson extends Component {
     componentDidMount(){
         this.forceUpdate();
     }
+    componentWillMount(){
+        console.log(this.props.navigation.state.params.location);
+    };
 
     render(){
         return(
@@ -15,7 +17,7 @@ export default class AppJson extends Component {
                     <View>
                         <AppJsondata/>
                         <AppWeather/>
-                        <AppCamera/>
+                        <AppCamera location={this.props.navigation.state.params.location} />
                     </View>
                 </ScrollView>
         );
