@@ -53,7 +53,7 @@ export class AppMap extends Component {
                     //asetetaan kameroiden arraylistin pituus muuttujaksi
                     let cameralength = responseData.features.length;
                     //kloonataan original2 array lista
-                    let original2 = [...this.state.coordinates2];
+                    let original2 = [...this.state.cameras];
                     //asetetaan arraylist, joka tulee sisältämään kaikki tiellä olevat kamerat
                     let filtered = [];
                     //asetetaan latitude ja longitude arraylistaat waypoint-arraylistan objektien arvoista
@@ -94,7 +94,7 @@ export class AppMap extends Component {
                             }
                         }
                     console.log("done, waypoints: ", waypoints);
-                    this.setState({coordinates2: filtered});
+                    this.setState({cameras: filtered});
 
 
                 }
@@ -122,7 +122,7 @@ export class AppMap extends Component {
                 },
 
             ],
-            coordinates2: [
+            cameras: [
                 {
                     latitude:  61.2933,
                     longitude: 25.040,
@@ -156,7 +156,6 @@ export class AppMap extends Component {
 
         let waypoints = this.state.waypoints.length;
         console.log("da way: ",waypoints);
-
         return (
             <View style={[styles.container]}>
                 <MapView
@@ -178,7 +177,7 @@ export class AppMap extends Component {
 
                         </MapView.Marker>
                     )}
-                    {this.state.coordinates2.map((coordinate, index) =>
+                    {this.state.cameras.map((coordinate, index) =>
                         <MapView.Marker key={`coordinate_${index}`} coordinate={coordinate}
                                         image={require('../assets/img/camera.bmp')}
                                         title = {`${coordinate.latitude}`}
@@ -191,8 +190,8 @@ export class AppMap extends Component {
                     <MapViewDirections
                         origin={this.state.coordinates[1]}
                         destination={this.state.coordinates[0]}
-                        apikey={GOOGLE_MAPS_APIKEY}
-                        strokeWidth={3}
+                        apikey={"AIzaSyBa1PSCHdZ74voA-BJTF1GGtRvNg_GuaLs"}
+                        strokeWidth={4}
                         strokeColor="hotpink"
                         onReady={(params) => {
                             for (let i = 0; i < params.coordinates.length; i++) {
@@ -208,10 +207,7 @@ export class AppMap extends Component {
                 <Button
                     onPress={() =>  {
                         console.log("nappi");
-
                         //this.props.navigation.navigate("Places");
-                            update();
-
                     }}
                     title="Päivitä"
                     accessibilityLabel="Learn more about this purple button"

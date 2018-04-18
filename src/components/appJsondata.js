@@ -9,19 +9,20 @@ export default class AppJsondata extends Component {
         this.state = {asema: '', sijainti: '', aika: ''};
     };
 
-    componentDidMount() {
+    componentDidUpdate() {
+        if (this.state.asema !== this.props.asema) {
         fetch('https://tie.digitraffic.fi/api/v1/data/camera-data/')
             .then((response) => response.json())
             .then((responseData) => {
 
-                let stationIndex = 6;
+                let stationIndex = this.props.indexprop;
                 let cameraIndex = 0;
                 this.setState({
-                    asema: responseData.cameraStations[stationIndex].id,
+                    asema: this.props.asemaprop,
                     sijainti: responseData.cameraStations[stationIndex].cameraPresets[cameraIndex].presentationName,
                     aika: responseData.cameraStations[stationIndex].cameraPresets[cameraIndex].measuredTime
                 });
-            });
+            });}
     }
 
     render() {
