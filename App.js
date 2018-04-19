@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
-import { Dimensions, Text , FlatList, View, Button, AppRegistry, StyleSheet, ListView } from 'react-native';
+import { Dimensions, Text , FlatList, View, Button, AppRegistry, StyleSheet, ListView, Image } from 'react-native';
 import {AppMap} from './src/screen/appMap';
 import GooglePlacesInput from './src/screen/AppPlaces';
 import AppJson from "./src/screen/appJson";
 import { NavigationComponent } from 'react-native-material-bottom-navigation';
-import { TabNavigator, NavigationActions } from 'react-navigation';
+import {TabNavigator, NavigationActions, StackNavigator} from 'react-navigation';
 
 import Icon from "expo/src/Icon";
 
@@ -46,45 +46,34 @@ class Map extends React.Component {
     render() { }
 }
 
-const Navigation = TabNavigator({
+
+
+
+const Navigation = StackNavigator({
+
+
 
         Places: { screen: GooglePlacesInput },
         Map: { screen: AppMap },
         Json: { screen: AppJson },
-}, {
-    tabBarComponent: NavigationComponent,
-    tabBarPosition: 'top',
-    animationEnabled: false,
-    swipeEnabled: true,
-    tabBarOptions: {
-        bottomNavigationOptions: {
-            backBehavior: "initialRoute" ,
-            labelColor: 'white',
-            rippleColor: 'white',
-            tabs: {
-                Json: {
-                    barBackgroundColor: '#37474F'
-                },
-                Places: {
-                    barBackgroundColor: '#00796B'
-                },
-                Map: {
-                    barBackgroundColor: '#37474f',
-
-                }
-            }
-        }
     }
-}
+    ,
+    {navigationOptions:{
+            headerStyle:{backgroundColor:'#109482', marginTop:24,  },
+            //HeaderTitle:<Image size={24} source={require('../lucky7app/src/assets/img/home.png')} />
+            /*     title: <Image source={require('../lucky7app/src/assets/img/home.png')}/>
+             })*/
+        }}
 );
-
 export default class lucky7app extends React.Component{
-       render() {
-              return (
-                        <Navigation/>
+    render() {
 
-                  )
-                }
+
+        return (
+            <Navigation/>
+
+        )
+    }
 }
 
 

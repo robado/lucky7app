@@ -47,15 +47,42 @@ export class GooglePlacesInput extends Component {
                     types: '(cities)' // default: 'geocode'
                 }}
                 styles={{
+
                     description: {
-                        fontWeight: 'bold'
+                        fontFamily:'Roboto',
+                        fontSize:17,
+                        height:20,
+
+
+
+                    },
+                    textInputContainer: {
+                        width: '100%',
+                        backgroundColor: '#fff',
+                        borderTopWidth: 10,
+                        borderBottomWidth:70,
+                        borderTopColor:'#00796B',
+                        borderBottomColor:'#00796B',
+
+                    },
+                    textInput: {
+                        marginLeft: 1,
+                        marginRight: 1,
+                        height: 50,
+                        color: '#000',
+                        fontSize: 20,
                     },
                     predefinedPlacesDescription: {
-                        color: '#1faadb'
-                    }
+                        color: '#1faadb',
+                        fontSize:15,
+
+
+                    },
+
+
                 }}
 
-                currentLocation={true} // Will add a 'Current location' button at the top of the predefined places list
+                currentLocation={false} // Will add a 'Current location' button at the top of the predefined places list
                 currentLocationLabel="Current location"
                 nearbyPlacesAPI='GooglePlacesSearch' // Which API to use: GoogleReverseGeocoding or GooglePlacesSearch
                 GoogleReverseGeocodingQuery={{
@@ -72,7 +99,7 @@ export class GooglePlacesInput extends Component {
                 //  predefinedPlaces={[homePlace, workPlace]}
 
                 debounce={0} // debounce the requests in ms. Set to 0 to remove debounce. By default 0ms.
-                renderRightButton={() => <Text></Text>}
+               // renderRightButton={() => <Text></Text>}
 
             />
 
