@@ -40,7 +40,7 @@ export default class AppJson extends Component {
                     <View>
                         <AppJsondata asemaprop = {this.state.Id} indexprop = {this.state.index}/>
                         <AppWeather/>
-                        <AppCamera image = {this.state.Id} />
+                        <AppCamera image={[this.state.Id, this.state.index]}/>
                     </View>
                 </ScrollView>
         );

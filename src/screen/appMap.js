@@ -19,7 +19,7 @@ const LATITUDE = 60.1699;
 const LONGITUDE = 24.9384;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
-const GOOGLE_MAPS_APIKEY = ''; // syötä apikey tänne
+const GOOGLE_MAPS_APIKEY = 'AIzaSyAk6tQcvv2Wy0uleMAd34PWBbBcnkirJBI'; // syötä apikey tänne
 
 
 export class AppMap extends Component {
@@ -46,7 +46,7 @@ export class AppMap extends Component {
         this.setState({coordinates: original});
 
                             // asemien kordinaattien asettaminen
-        let waypoints = this.state.waypoints.length;
+        let waypoints = await this.state.waypoints.length;
         await fetch('https://tie.digitraffic.fi/api/v1/metadata/camera-stations')
             .then((response) => response.json())
                 .then((responseData) => {
@@ -77,7 +77,7 @@ export class AppMap extends Component {
                     //for-lause, jossa verrataan kameroita piirrettyyn reittiin. Käytetään boundcameras-arraylistaa, joka
                     //setattiin aikaisemmassa algoritmissa aikavaativuuksien vuoksi
                     for (let i = 0; i < boundcameras.length; i++) {
-                        for (let x = 0; x <= waypoints; x++){
+                        for (let x = 0; x < waypoints; x++){
                             let geodistance = geolib.getDistance(
                                 {latitude: boundcameras[i].latitude, longitude: boundcameras[i].longitude},
                                 {latitude: this.state.waypoints[x].latitude, longitude: this.state.waypoints[x].longitude}
@@ -204,14 +204,6 @@ export class AppMap extends Component {
                         }}
                     />
                 </MapView>
-                <Button
-                    onPress={() =>  {
-                        console.log("nappi");
-                        //this.props.navigation.navigate("Places");
-                    }}
-                    title="Päivitä"
-                    accessibilityLabel="Learn more about this purple button"
-                />
             </View>
         );
 
