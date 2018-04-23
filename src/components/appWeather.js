@@ -26,32 +26,21 @@ export default class AppWeather extends Component {
 
     render() {
 
-        return <View>
-            <Text>
-                <Text style={styles.bold}>{`Lämpötila: `}</Text>
-                <Text style={styles.bold}>{this.state.temp}</Text>
-            </Text>
-
-            <Text>
-                <Text style={styles.bold}>{`Tien lämpötila: `}</Text>
-                <Text style={styles.bold}>{this.state.roadTemp}</Text>
-            </Text>
-
-            <Text>
-                <Text style={styles.bold}>{`Tuulen nopeus: `}</Text>
-                <Text style={styles.bold}>{this.state.wind}</Text>
-            </Text>
-
-            <Image style={{width: 50, height: 50}} source={{uri: 'https://corporate.foreca.com/en/uploads/Symbolset-1/' + this.state.WSymbol + '.png'}}/>
-        </View>;
+        return <View style={{justifyContent:'center', alignItems:'center', marginTop:20,}}>
+            <Text style={styles.bold}>{`Lämpötila: ` + this.state.temp}</Text>
+            <Text style={styles.bold}>{`Tien lämpötila: ` + this.state.roadTemp}</Text>
+            <Text style={styles.bold}>{`Tuulen nopeus: ` + this.state.wind}</Text>
+            <Image style={{width: 70, height: 70}} source={{uri: 'https://corporate.foreca.com/en/uploads/Symbolset-1/' + this.state.WSymbol + '.png'}}/>
+                </View>;
     }
 }
 
 const styles = StyleSheet.create({
     bold: {
-        color: '#666666',
-        fontFamily: 'Roboto',
-        fontSize: 20
+        color: '#fff',
+        fontFamily: 'sans-serif-light',
+        fontSize: 20,
+        textAlign:'center'
     }
 });
 module.exports = AppWeather;

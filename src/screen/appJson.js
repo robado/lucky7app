@@ -3,6 +3,9 @@ import {Text, View, FlatList, ScrollView} from 'react-native';
 import AppJsondata from "../components/appJsondata";
 import AppWeather from "../components/appWeather";
 import AppCamera from "../components/appCamera";
+
+import { Card, CardTitle, CardContent, CardAction, CardButton, CardImage } from 'react-native-cards';
+
 export default class AppJson extends Component {
     constructor(props) {
         super(props);
@@ -43,13 +46,19 @@ export default class AppJson extends Component {
 
     render(){
         return(
+            <View style={{backgroundColor:'#e6f3f2'}}>
                 <ScrollView>
                     <View>
+                        <Card style={{backgroundColor:'#86999b'}}>
+                            <CardContent>
                         <AppJsondata image={[this.state.Id, this.state.index, this.state.tarkkaid,]}/>
                         <AppWeather/>
+                            </CardContent>
+                        </Card>
                         <AppCamera image={[this.state.Id, this.state.index, this.state.tarkkaid,]}/>
                     </View>
                 </ScrollView>
+            </View>
         );
     }
 }

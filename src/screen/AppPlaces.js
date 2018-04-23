@@ -61,15 +61,15 @@ export class GooglePlacesInput extends Component {
                         backgroundColor: '#fff',
                         borderTopWidth: 10,
                         borderBottomWidth:70,
-                        borderTopColor:'#00796B',
-                        borderBottomColor:'#00796B',
+                        borderTopColor:'#e3e3e3',
+                        borderBottomColor:'#e3e3e3',
 
                     },
                     textInput: {
                         marginLeft: 1,
                         marginRight: 1,
                         height: 50,
-                        color: '#000',
+                        color: '#666',
                         fontSize: 20,
                     },
                     predefinedPlacesDescription: {

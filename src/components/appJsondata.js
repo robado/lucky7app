@@ -29,19 +29,23 @@ export default class AppJsondata extends Component {
     render() {
 
         return <View>
-            <Text>
-                <Text style={styles.bold}>{`Kameran asema: `}</Text>
-                <Text style={styles.bold}>{this.state.asema}</Text>
-            </Text>
+
+                <Text style={styles.bold}>{`Kameran asema: ` + this.state.asema}</Text>
+
+
         </View>;
     }
 }
 
 const styles = StyleSheet.create({
     bold: {
-        color: '#666666',
-        fontFamily: 'Roboto',
-        fontSize: 20
+        color: '#fff',
+        fontFamily: 'sans-serif-light',
+        fontSize: 35,
+        textAlign:'center',
+        //fontWeight:'bold',
+        marginTop:10,
+
     }
 });
 module.exports = AppJsondata;

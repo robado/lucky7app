@@ -59,7 +59,7 @@ const Navigation = StackNavigator({
     }
     ,
     {navigationOptions:{
-            headerStyle:{backgroundColor:'#109482', marginTop:24,  },
+            headerStyle:{backgroundColor:'#3a606a', marginTop:24, height: 40 },
             //HeaderTitle:<Image size={24} source={require('../lucky7app/src/assets/img/home.png')} />
             /*     title: <Image source={require('../lucky7app/src/assets/img/home.png')}/>
              })*/
