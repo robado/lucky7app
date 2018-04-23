@@ -8,13 +8,16 @@ export default class AppJson extends Component {
         super(props);
         this.state = {Id: '',
             coords: this.props.navigation.state.params.location,
-            index: Number};
+            index: Number,
+            tarkkaid: '',
+            sijainti: '',
+            aika: ''};
     };
     async componentWillMount(){
         this.setState({
             coords: (this.props.navigation.state.params.location)
         });
-        fetch("https://tie.digitraffic.fi/api/v1/metadata/camera-stations")
+       await fetch("https://tie.digitraffic.fi/api/v1/metadata/camera-stations")
             .then((response) => response.json())
             .then((responseData) => {
                 let cameralength = responseData.features.length;
@@ -22,14 +25,18 @@ export default class AppJson extends Component {
                     if (this.state.coords.latitude === responseData.features[i].geometry.coordinates[1]
                         && this.state.coords.longitude === responseData.features[i].geometry.coordinates[0]) {
                         let stationid = responseData.features[i].id;
+                        let tarkkastationid = responseData.features[i].properties.id;
                         console.log("kamera löydetty: ", stationid);
                         this.setState({
                             Id: (stationid),
-                            index: i
+                            index: i,
+                            tarkkaid: tarkkastationid
                         });
                         break
                     }
-                }});
+                }
+
+            });
         this.forceUpdate();
     }
 
@@ -38,9 +45,9 @@ export default class AppJson extends Component {
         return(
                 <ScrollView>
                     <View>
-                        <AppJsondata asemaprop = {this.state.Id} indexprop = {this.state.index}/>
+                        <AppJsondata image={[this.state.Id, this.state.index, this.state.tarkkaid,]}/>
                         <AppWeather/>
-                        <AppCamera image={[this.state.Id, this.state.index]}/>
+                        <AppCamera image={[this.state.Id, this.state.index, this.state.tarkkaid,]}/>
                     </View>
                 </ScrollView>
         );

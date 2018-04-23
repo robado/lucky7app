@@ -15,13 +15,14 @@ export default class AppJsondata extends Component {
             .then((response) => response.json())
             .then((responseData) => {
 
-                let stationIndex = this.props.indexprop;
+                let stationIndex = this.props.image[1];
                 let cameraIndex = 0;
-                this.setState({
-                    asema: this.props.asemaprop,
-                    sijainti: responseData.cameraStations[stationIndex].cameraPresets[cameraIndex].presentationName,
-                    aika: responseData.cameraStations[stationIndex].cameraPresets[cameraIndex].measuredTime
-                });
+                    this.setState({
+                        asema: this.props.image[0],
+                        sijainti: this.props.image[3],
+                        aika: this.props.image[4]
+                    });
+
             });}
     }
 
@@ -30,17 +31,7 @@ export default class AppJsondata extends Component {
         return <View>
             <Text>
                 <Text style={styles.bold}>{`Kameran asema: `}</Text>
-                <Text>{this.state.asema}</Text>
-            </Text>
-
-            <Text>
-                <Text style={styles.bold}>{`Sijainti: `}</Text>
-                <Text>{this.state.sijainti}</Text>
-            </Text>
-
-            <Text>
-                <Text style={styles.bold}>{`Kuvan aika: `}</Text>
-                <Text>{this.state.aika}</Text>
+                <Text style={styles.bold}>{this.state.asema}</Text>
             </Text>
         </View>;
     }
@@ -48,9 +39,9 @@ export default class AppJsondata extends Component {
 
 const styles = StyleSheet.create({
     bold: {
-        color: 'black',
-        fontWeight: 'bold',
-        fontSize: 14
+        color: '#666666',
+        fontFamily: 'Roboto',
+        fontSize: 20
     }
 });
 module.exports = AppJsondata;
