@@ -41,7 +41,7 @@ export default class AppCamera extends Component {
             let numero = this.props.image[1];
             let camera;
             let cameraId = [];
-            let sijaintifiltered = [];
+            let sijaintifiltered = [...this.state.sijainti];
             for(let i = 0; i < responseData.cameraStations[numero].cameraPresets.length; i++) {
                 camera = responseData.cameraStations[numero].cameraPresets[i].id;
                 cameraId.push(camera);

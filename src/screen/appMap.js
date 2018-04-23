@@ -179,8 +179,9 @@ export class AppMap extends Component {
                     )}
                     {this.state.cameras.map((coordinate, index) =>
                         <MapView.Marker key={`coordinate_${index}`} coordinate={coordinate}
-                                        image={require('../assets/img/camera.bmp')}
+                                        image={require('../assets/img/camera2.bmp')}
                                         title = {`${coordinate.latitude}`}
+                                        opacity = {0.7}
                                         onPress={() =>  {
                                             this.props.navigation.navigate("Json", {location: coordinate});
 
