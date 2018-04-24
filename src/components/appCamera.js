@@ -29,24 +29,29 @@ export default class AppCamera extends Component {
             aika:'',
         };
     };
-
+                        //ladataan kameratietoa ja suuntatietoa
     async componentDidUpdate() {
+        //varmistetaan, että ei jäädä infinite looppiin
         if (this.state.imgId !== this.props.image[0]) {
         this.setState({
             imgId: (this.props.image[0])
         });
+                        //hateaan kameran dataa
             await fetch("https://tie.digitraffic.fi/api/v1/data/camera-data/")
                 .then((response) => response.json())
                 .then((responseData) => {
+                        //setataan kameran indexnumero ja arraylist kameroiden hakuun
             let numero = this.props.image[1];
             let camera;
             let cameraId = [];
             let sijaintifiltered = [...this.state.sijainti];
+                        // looppi joka katsoo kaikki kameran idt ja mappaa ne oikeisiin suuntatietoihin
             for(let i = 0; i < responseData.cameraStations[numero].cameraPresets.length; i++) {
                 camera = responseData.cameraStations[numero].cameraPresets[i].id;
                 cameraId.push(camera);
-
                 let check =  responseData.cameraStations[numero].cameraPresets[i].id;
+                        //tarkistaa 10 eri id mahdollisuutta ja jos täsmää, niin lisää arraylistiin
+                        // sen jälkeen id laitetaan this.stateen ja idtä käytetään suunnan hakemiseen
                 console.log("vertaus: ",check);
                 for (let x = 0; x < 10; x++) {
                     console.log("vertaus algoritmi:", this.props.image[2] + "0" + x);
@@ -59,7 +64,6 @@ export default class AppCamera extends Component {
                             sijainti: sijaintifiltered,
                             aika: responseData.cameraStations[numero].cameraPresets[i].measuredTime
                         });
-                        break
                     }
                 }
             }
@@ -88,7 +92,7 @@ export default class AppCamera extends Component {
                 <Card>
                     <CardImage
                         source={{uri: 'https://weathercam.digitraffic.fi/'+ this.state.cameranId[1] + '.jpg' + '?' + new Date()}}
-                        title="Suunta 2"
+                        title={this.state.sijainti[1].suunta}
                     />
                     <CardTitle
                         subtitle={"Kameran ID: " + this.state.cameranId[1] + "Aika: " +  this.state.aika}
@@ -97,7 +101,7 @@ export default class AppCamera extends Component {
                 <Card>
                     <CardImage
                         source={{uri: 'https://weathercam.digitraffic.fi/'+ this.state.cameranId[2] + '.jpg' + '?' + new Date()}}
-                        title="Suunta 3"
+                        title={this.state.sijainti[2].suunta}
                     />
                     <CardTitle
                         subtitle={"Kameran ID: " + this.state.cameranId[2] + "Aika: " +  this.state.aika}
@@ -106,7 +110,7 @@ export default class AppCamera extends Component {
                 <Card>
                     <CardImage
                         source={{uri: 'https://weathercam.digitraffic.fi/'+ this.state.cameranId[3] + '.jpg' + '?' + new Date()}}
-                        title="Suunta 4"
+                        title={this.state.sijainti[3].suunta}
                     />
                     <CardTitle
                         subtitle={"Kameran ID: " + this.state.cameranId[3] + "Aika: " +  this.state.aika}

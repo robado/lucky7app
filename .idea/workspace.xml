@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b1a826be-8f8e-4c1d-a0ac-fa90c16abf56" name="Default" comment="Kuvasivua hiottu, react-native">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/assets/img/camera2.bmp" />
+    <list default="true" id="b1a826be-8f8e-4c1d-a0ac-fa90c16abf56" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/assets/img/camera.bmp" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/assets/img/home.bmp" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/assets/img/home.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/assets/img/lucky.png" afterPath="" />
       <change beforePath="$PROJECT_DIR$/src/components/appCamera.js" afterPath="$PROJECT_DIR$/src/components/appCamera.js" />
       <change beforePath="$PROJECT_DIR$/src/screen/appMap.js" afterPath="$PROJECT_DIR$/src/screen/appMap.js" />
     </list>
@@ -34,14 +29,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="appMap.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="appMap.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/screen/appMap.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="172" column="45" lean-forward="true" selection-start-line="172" selection-start-column="45" selection-end-line="172" selection-end-column="45" />
+            <state relative-caret-position="2457">
+              <caret line="181" column="84" lean-forward="false" selection-start-line="181" selection-start-column="84" selection-end-line="181" selection-end-column="84" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
+                <marker date="1524564657578" expanded="true" signature="8774:9099" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="core.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/promise/setimmediate/core.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="532">
+              <caret line="191" column="3" lean-forward="true" selection-start-line="191" selection-start-column="3" selection-end-line="191" selection-end-column="3" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -49,11 +55,9 @@
       <file leaf-file-name="appJson.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/screen/appJson.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1050">
-              <caret line="54" column="37" lean-forward="false" selection-start-line="54" selection-start-column="37" selection-end-line="54" selection-end-column="37" />
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="294">
+              <caret line="35" column="43" lean-forward="false" selection-start-line="35" selection-start-column="43" selection-end-line="35" selection-end-column="43" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -61,11 +65,10 @@
       <file leaf-file-name="appWeather.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/appWeather.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="483">
-              <caret line="24" column="5" lean-forward="false" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
+            <state relative-caret-position="567">
+              <caret line="28" column="91" lean-forward="true" selection-start-line="28" selection-start-column="91" selection-end-line="28" selection-end-column="91" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
-                <marker date="1524504015533" expanded="true" signature="1009:1014" ph="&lt;View/&gt;" />
               </folding>
             </state>
           </provider>
@@ -81,11 +84,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="appCamera.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="appCamera.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/appCamera.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="840">
-              <caret line="43" column="60" lean-forward="false" selection-start-line="43" selection-start-column="60" selection-end-line="43" selection-end-column="60" />
+            <state relative-caret-position="147">
+              <caret line="52" column="99" lean-forward="true" selection-start-line="52" selection-start-column="99" selection-end-line="52" selection-end-column="99" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -140,6 +143,7 @@
       <find>waypoints</find>
       <find>API</find>
       <find>api</find>
+      <find>&lt;</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -170,13 +174,13 @@
         <option value="$PROJECT_DIR$/src/components/MarkerCalloutObject.js" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/package-lock.json" />
-        <option value="$PROJECT_DIR$/src/components/appCamera.js" />
         <option value="$PROJECT_DIR$/src/screen/AppPlaces.js" />
         <option value="$PROJECT_DIR$/App.js" />
         <option value="$PROJECT_DIR$/src/components/appWeather.js" />
         <option value="$PROJECT_DIR$/src/components/appJsondata.js" />
         <option value="$PROJECT_DIR$/src/screen/appJson.js" />
         <option value="$PROJECT_DIR$/src/screen/appMap.js" />
+        <option value="$PROJECT_DIR$/src/components/appCamera.js" />
       </list>
     </option>
   </component>
@@ -576,11 +580,18 @@
       <option name="project" value="LOCAL" />
       <updated>1524400699086</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="mapin kameraa isonnettu ja pistetty kivemman näköiseksi">
+      <created>1524512639050</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1524512639050</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="287785000" />
+    <option name="totallyTimeSpent" value="291702000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
@@ -692,7 +703,8 @@
     <MESSAGE value="kaikki kamerat ja kaikki waypointit verrataan keskenään ja matchaavat kamerat piirtyy reitin varrelle." />
     <MESSAGE value="haku optimoitu. propsit siirtyy app cameraan kuvan valintaa varten" />
     <MESSAGE value="Kuvasivua hiottu, react-native-cards api lisätty, kamerat näkyy paremmin, ensimmäinen suunta näkyy dynaamisesti pohjoiseen ja etelään mennessä" />
-    <option name="LAST_COMMIT_MESSAGE" value="Kuvasivua hiottu, react-native-cards api lisätty, kamerat näkyy paremmin, ensimmäinen suunta näkyy dynaamisesti pohjoiseen ja etelään mennessä" />
+    <MESSAGE value="mapin kameraa isonnettu ja pistetty kivemman näköiseksi" />
+    <option name="LAST_COMMIT_MESSAGE" value="mapin kameraa isonnettu ja pistetty kivemman näköiseksi" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -701,21 +713,11 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/screen/appJson.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="23" lean-forward="true" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -998,7 +1000,7 @@
         <state relative-caret-position="273">
           <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
           <folding>
-            <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#0#39#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1032,37 +1034,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/appCamera.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
-          <caret line="43" column="60" lean-forward="false" selection-start-line="43" selection-start-column="60" selection-end-line="43" selection-end-column="60" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/appWeather.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="24" column="5" lean-forward="false" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-            <marker date="1524504015533" expanded="true" signature="1009:1014" ph="&lt;View/&gt;" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/screen/appJson.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1050">
-          <caret line="54" column="37" lean-forward="false" selection-start-line="54" selection-start-column="37" selection-end-line="54" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/assets/img/camera2.bmp">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -1081,10 +1052,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/screen/appJson.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="35" column="43" lean-forward="false" selection-start-line="35" selection-start-column="43" selection-end-line="35" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/appWeather.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="567">
+          <caret line="28" column="91" lean-forward="true" selection-start-line="28" selection-start-column="91" selection-end-line="28" selection-end-column="91" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/promise/setimmediate/core.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="532">
+          <caret line="191" column="3" lean-forward="true" selection-start-line="191" selection-start-column="3" selection-end-line="191" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/screen/appMap.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="172" column="45" lean-forward="true" selection-start-line="172" selection-start-column="45" selection-end-line="172" selection-end-column="45" />
+        <state relative-caret-position="2457">
+          <caret line="181" column="84" lean-forward="false" selection-start-line="181" selection-start-column="84" selection-end-line="181" selection-end-column="84" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+            <marker date="1524564657578" expanded="true" signature="8774:9099" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/appCamera.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="52" column="99" lean-forward="true" selection-start-line="52" selection-start-column="99" selection-end-line="52" selection-end-column="99" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
