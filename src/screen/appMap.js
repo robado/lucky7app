@@ -46,7 +46,9 @@ export class AppMap extends Component {
         this.setState({coordinates: original});
 
                             // asemien kordinaattien asettaminen
-        let waypoints = await this.state.waypoints.length;
+        //cloonataan waypoints ja otetaan pituus. Poisti yhden bugin
+        let placeholderwaypoints = await [...this.state.waypoints];
+        let waypoints = await placeholderwaypoints.length;
         await fetch('https://tie.digitraffic.fi/api/v1/metadata/camera-stations')
             .then((response) => response.json())
                 .then((responseData) => {
@@ -85,7 +87,7 @@ export class AppMap extends Component {
                             //katsoo onko kamera tietyn matkan päässä waypointista
                             //jos kamera on, se lisää ne filtered listaaan
                             //jos ei ole, se ei tee mitään
-                            if (geodistance <= 1000){
+                            if (geodistance < 1000){
                                 console.log("cool and good", "number: " + i,"coordinates: " + Math.round(responseData.features[i].geometry.coordinates[1]*100)/100,
                                     Math.round(responseData.features[i].geometry.coordinates[0]*100)/100);
                                 console.log("distance COOL: ", geodistance);
