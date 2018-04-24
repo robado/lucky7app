@@ -1,13 +1,10 @@
 import * as React from 'react';
-import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
-import { Dimensions, Text , FlatList, View, Button, AppRegistry, StyleSheet, ListView, Image } from 'react-native';
+import {  AppRegistry, } from 'react-native';
 import {AppMap} from './src/screen/appMap';
 import GooglePlacesInput from './src/screen/AppPlaces';
 import AppJson from "./src/screen/appJson";
-import { NavigationComponent } from 'react-native-material-bottom-navigation';
-import {TabNavigator, NavigationActions, StackNavigator} from 'react-navigation';
+import { StackNavigator} from 'react-navigation';
 
-import Icon from "expo/src/Icon";
 
 
 
@@ -17,7 +14,6 @@ class Json extends React.Component {
         tabBar: {
             label: 'Json',
 
-            icon: () => (<Icon size={24} color="white" name="json" />)
         }
     };
 
@@ -28,7 +24,6 @@ class Places extends React.Component {
     static navigationOptions = {
         tabBar: {
             label: 'Places',
-            icon: () => (<Icon size={24} color="white" name="places" />)
         }
     };
 
@@ -39,7 +34,6 @@ class Map extends React.Component {
     static navigationOptions = {
         tabBar: {
             label: 'Map',
-            icon: () => (<Icon size={24} color="white" name="map" />)
         }
     };
 
@@ -51,19 +45,30 @@ class Map extends React.Component {
 
 const Navigation = StackNavigator({
 
+        Places: { screen: GooglePlacesInput,
+            navigationOptions:{
+                headerStyle:{backgroundColor:'#3a606a', justifyContent: 'center', alignItems:'center'},
+                title: 'Hae Määränpääsi',
+                headerTitleStyle: {alignSelf: 'center', color:'#fff', justifyContent: 'center', alignItems:'center'},
+            }
+        },
+        Map: { screen: AppMap,
+            navigationOptions:{
+                headerStyle:{backgroundColor:'#3a606a', justifyContent: 'center', alignItems:'center' },
+                title: 'Valitse Kamera',
+                headerTitleStyle: {alignSelf: 'center', color:'#fff', justifyContent: 'center', alignItems:'center'},
+            }
 
-
-        Places: { screen: GooglePlacesInput },
-        Map: { screen: AppMap },
-        Json: { screen: AppJson },
+        },
+        Json: { screen: AppJson,
+            navigationOptions:{
+                headerStyle:{backgroundColor:'#3a606a', justifyContent: 'center', alignItems:'center'},
+                title: 'Kamerat',
+                headerTitleStyle: {alignSelf: 'center', color:'#fff', justifyContent: 'center', alignItems:'center'},
+            }},
     }
-    ,
-    {navigationOptions:{
-            headerStyle:{backgroundColor:'#3a606a', marginTop:24, height: 40 },
-            //HeaderTitle:<Image size={24} source={require('../lucky7app/src/assets/img/home.png')} />
-            /*     title: <Image source={require('../lucky7app/src/assets/img/home.png')}/>
-             })*/
-        }}
+
+
 );
 export default class lucky7app extends React.Component{
     render() {
