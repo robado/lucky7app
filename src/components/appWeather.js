@@ -6,31 +6,33 @@ import {Text, View, Image, StyleSheet} from 'react-native';
 export default class AppWeather extends Component {
     constructor(props) {
         super(props);
-        this.state = {roadTemp: '', temp: '', wind: '', WSymbol: ''};
+        this.state = {temp: '', wind: '', WSymbol: '', coords: ''};
     };
 
-    componentDidMount() {
-        fetch('https://tie.digitraffic.fi/api/v1/data/road-conditions')
-            .then((response) => response.json())
-            .then((responseData) => {
-
-                let numero = 67;
-                this.setState({
-                    roadTemp: responseData.weatherData[numero].roadConditions[0].roadTemperature + ('°C'),
-                    temp: responseData.weatherData[numero].roadConditions[0].temperature + ('°C'),
-                    wind: responseData.weatherData[numero].roadConditions[0].windSpeed + (' m/s'),
-                    WSymbol: (responseData.weatherData[numero].roadConditions[0].weatherSymbol )
+    componentDidUpdate() {
+        if (this.state.coords !== this.props.image[3]) {
+            let koordinaatit = this.props.image[3];
+            this.setState({coords: koordinaatit});
+            let lat = koordinaatit.latitude;
+            let lng = koordinaatit.longitude;
+            fetch('http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lng + '&appid=066fec7e455e1609f09e5a74e50cae15')
+                .then((response) => response.json())
+                .then((responseData) => {
+                    this.setState({
+                        temp: Math.round(responseData.main.temp-273) + '°C',
+                        wind: responseData.wind.speed + (' m/s'),
+                        WSymbol: responseData.weather[0].icon
+                    });
                 });
-            });
+        }
     }
 
     render() {
 
         return <View style={{justifyContent:'center', alignItems:'center', marginTop:20,}}>
             <Text style={styles.bold}>{`Lämpötila: ` + this.state.temp}</Text>
-            <Text style={styles.bold}>{`Tien lämpötila: ` + this.state.roadTemp}</Text>
             <Text style={styles.bold}>{`Tuulen nopeus: ` + this.state.wind}</Text>
-            <Image style={{width: 70, height: 70}} source={{uri: 'https://corporate.foreca.com/en/uploads/Symbolset-1/' + this.state.WSymbol + '.png'}}/>
+            <Image style={{width: 70, height: 70}} source={{uri: 'http://openweathermap.org/img/w/'+ this.state.WSymbol + '.png'}}/>
                 </View>;
     }
 }

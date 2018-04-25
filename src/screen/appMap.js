@@ -49,6 +49,9 @@ export class AppMap extends Component {
         //cloonataan waypoints ja otetaan pituus. Poisti yhden bugin
         let placeholderwaypoints = await [...this.state.waypoints];
         let waypoints = await placeholderwaypoints.length;
+        let chunkedway = _.chunk(placeholderwaypoints, [size=(waypoints)/20]);
+        let boundcameras = [];
+        console.log("chunk: ", chunkedway[0].length);
         await fetch('https://tie.digitraffic.fi/api/v1/metadata/camera-stations')
             .then((response) => response.json())
                 .then((responseData) => {
@@ -59,21 +62,31 @@ export class AppMap extends Component {
                     //asetetaan arraylist, joka tulee sisältämään kaikki tiellä olevat kamerat
                     let filtered = [];
                     //asetetaan latitude ja longitude arraylistaat waypoint-arraylistan objektien arvoista
-                    let latitudes = this.state.waypoints.map((point) => point.latitude);
-                    let longitudes = this.state.waypoints.map((point) => point.longitude);
-                    //asetetaan boundcameras, minkä tarkoituksena on rajata vertailualgoritmin kokoa
-                    let boundcameras = [];
-                    //for-lause, joka katsoo, onko kamera tiettyjen koordinaattien muodostamassa neliössä
-                    //jos on, niin se lisää koordinaatin bouncameras -arraylistaan
-                    //jos ei, ei tee mitään
-                    console.log("lat min ja max: ",_.min(latitudes), _.max(latitudes));
-                    console.log("lon min ja max: ",_.min(longitudes), _.max(longitudes));
-                    for (let j = 0; j < cameralength; j++){
-                        original2[j] = { latitude: responseData.features[j].geometry.coordinates[1],
-                            longitude: responseData.features[j].geometry.coordinates[0]};
-                        if (original2[j].latitude > _.min(latitudes) && original2[j].latitude < _.max(latitudes) && original2[j].longitude > _.min(longitudes) && original2[j].longitude < _.max(longitudes)) {
-                                console.log("lisätään boundcameraan: ",original2[j].latitude, original2[j].longitude );
+                    for (let x=0; x < chunkedway.length; x++) {
+                        let latitudes = chunkedway[x].map((point) => point.latitude);
+                        let longitudes = chunkedway[x].map((point) => point.longitude);
+
+                        for (let j = 0; j < cameralength; j++) {
+                            original2[j] = {
+                                latitude: responseData.features[j].geometry.coordinates[1],
+                                longitude: responseData.features[j].geometry.coordinates[0]
+                            };
+                            if (original2[j].latitude > _.min(latitudes) && original2[j].latitude < _.max(latitudes) && original2[j].longitude > _.min(longitudes) && original2[j].longitude < _.max(longitudes)) {
                                 boundcameras.push({latitude: original2[j].latitude, longitude: original2[j].longitude});
+                            }
+                        }
+                        //asetetaan boundcameras, minkä tarkoituksena on rajata vertailualgoritmin kokoa
+                        //for-lause, joka katsoo, onko kamera tiettyjen koordinaattien muodostamassa neliössä
+                        //jos on, niin se lisää koordinaatin bouncameras -arraylistaan
+                        //jos ei, ei tee mitään
+                        for (let j = 0; j < cameralength; j++) {
+                            original2[j] = {
+                                latitude: responseData.features[j].geometry.coordinates[1],
+                                longitude: responseData.features[j].geometry.coordinates[0]
+                            };
+                            if (original2[j].latitude > _.min(latitudes) && original2[j].latitude < _.max(latitudes) && original2[j].longitude > _.min(longitudes) && original2[j].longitude < _.max(longitudes)) {
+                                boundcameras.push({latitude: original2[j].latitude, longitude: original2[j].longitude});
+                            }
                         }
                     }
                     //for-lause, jossa verrataan kameroita piirrettyyn reittiin. Käytetään boundcameras-arraylistaa, joka
@@ -88,19 +101,14 @@ export class AppMap extends Component {
                             //jos kamera on, se lisää ne filtered listaaan
                             //jos ei ole, se ei tee mitään
                             if (geodistance < 1000){
-                                console.log("cool and good", "number: " + i,"coordinates: " + Math.round(responseData.features[i].geometry.coordinates[1]*100)/100,
-                                    Math.round(responseData.features[i].geometry.coordinates[0]*100)/100);
-                                console.log("distance COOL: ", geodistance);
                                 filtered.push({ latitude: boundcameras[i].latitude, longitude: boundcameras[i].longitude});
                                 break
                             }
                         }
-                    console.log("done, waypoints: ", waypoints);
                     this.setState({cameras: filtered});
 
 
                 }
-                    console.log(this.state.cameras);
             });
 
         this.forceUpdate();
@@ -126,8 +134,8 @@ export class AppMap extends Component {
             ],
             cameras: [
                 {
-                    latitude:  61.2933,
-                    longitude: 25.040,
+                    latitude:  25.040,
+                    longitude: 60.2933,
                 },
 
             ],
@@ -157,7 +165,6 @@ export class AppMap extends Component {
     render() {
 
         let waypoints = this.state.waypoints.length;
-        console.log("da way: ",waypoints);
         return (
             <View style={[styles.container]}>
                 <MapView
@@ -202,7 +209,6 @@ export class AppMap extends Component {
                                     longitude: params.coordinates[i].longitude};
                                 this.setState({waypoints: original3});
                             }
-                            console.log(this.state.waypoints);
                         }}
                     />
                 </MapView>

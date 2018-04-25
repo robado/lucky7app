@@ -51,11 +51,11 @@ export default class AppJson extends Component {
                     <View>
                         <Card style={{backgroundColor:'#86999b'}}>
                             <CardContent>
-                        <AppJsondata image={[this.state.Id, this.state.index, this.state.tarkkaid,]}/>
-                        <AppWeather/>
+                        <AppJsondata image={[this.state.Id, this.state.index, this.state.tarkkaid, this.state.coords]}/>
+                        <AppWeather image={[this.state.Id, this.state.index, this.state.tarkkaid, this.state.coords]}/>
                             </CardContent>
                         </Card>
-                        <AppCamera image={[this.state.Id, this.state.index, this.state.tarkkaid,]}/>
+                        <AppCamera image={[this.state.Id, this.state.index, this.state.tarkkaid, this.state.coords]}/>
                     </View>
                 </ScrollView>
             </View>
