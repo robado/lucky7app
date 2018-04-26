@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Text, View, FlatList, ScrollView} from 'react-native';
+import {Text, View, FlatList, ScrollView,} from 'react-native';
 import AppJsondata from "../components/appJsondata";
 import AppWeather from "../components/appWeather";
 import AppCamera from "../components/appCamera";
@@ -51,11 +51,11 @@ export default class AppJson extends Component {
                     <View>
                         <Card style={{backgroundColor:'#86999b'}}>
                             <CardContent>
-                        <AppJsondata image={[this.state.Id, this.state.index, this.state.tarkkaid,]}/>
-                        <AppWeather/>
+                        <AppJsondata image={[this.state.Id, this.state.index, this.state.tarkkaid, this.state.coords]}/>
+                        <AppWeather image={[this.state.Id, this.state.index, this.state.tarkkaid, this.state.coords]}/>
                             </CardContent>
                         </Card>
-                        <AppCamera image={[this.state.Id, this.state.index, this.state.tarkkaid,]}/>
+                        <AppCamera image={[this.state.Id, this.state.index, this.state.tarkkaid, this.state.coords]}/>
                     </View>
                 </ScrollView>
             </View>

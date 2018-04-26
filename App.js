@@ -47,24 +47,24 @@ const Navigation = StackNavigator({
        splash: { screen: splash},
         Places: { screen: GooglePlacesInput,
             navigationOptions:{
-                headerStyle:{backgroundColor:'#3a606a', justifyContent: 'center', alignItems:'center'},
+                headerStyle:{backgroundColor:'#3a606a'},
                 title: 'Hae Määränpääsi',
-                headerTitleStyle: {alignSelf: 'center', color:'#fff', justifyContent: 'center', alignItems:'center'},
+                headerTitleStyle: {color:'#fff'},
             }
         },
         Map: { screen: AppMap,
             navigationOptions:{
-                headerStyle:{backgroundColor:'#3a606a', justifyContent: 'center', alignItems:'center' },
+                headerStyle:{backgroundColor:'#3a606a'},
                 title: 'Valitse Kamera',
-                headerTitleStyle: {alignSelf: 'center', color:'#fff', justifyContent: 'center', alignItems:'center'},
+                headerTitleStyle: {color:'#fff'},
             }
 
         },
         Json: { screen: AppJson,
             navigationOptions:{
-                headerStyle:{backgroundColor:'#3a606a', justifyContent: 'center', alignItems:'center'},
+                headerStyle:{backgroundColor:'#3a606a'},
                 title: 'Kamerat',
-                headerTitleStyle: {alignSelf: 'center', color:'#fff', justifyContent: 'center', alignItems:'center'},
+                headerTitleStyle: {color:'#fff'},
             }},
     }
 

@@ -3763,8 +3763,8 @@ lodash@^4.0.0, lodash@^4.13.1, lodash@^4.14.0, lodash@^4.14.1, lodash@^4.16.6, l
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
 lodash@^4.17.5:
-  version "4.17.10"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.10.tgz#1b7793cf7259ea38fb3661d4d38b3260af8ae4e7"
+  version "4.17.5"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.5.tgz#99a92d65c0272debe8c96b6057bc8fbfa3bed511"
 
 lodash@~2.4.1:
   version "2.4.2"
@@ -4946,10 +4946,6 @@ react-native-scripts@1.11.1:
     qrcode-terminal "^0.11.0"
     rimraf "^2.6.1"
     xdl "48.0.2"
-
-react-native-splash-screen@^3.0.6:
-  version "3.0.6"
-  resolved "https://registry.yarnpkg.com/react-native-splash-screen/-/react-native-splash-screen-3.0.6.tgz#c0bbf2c8ae40a313c4c7044f55e569414ff68332"
 
 "react-native-svg@https://github.com/expo/react-native-svg/archive/5.5.1-exp.1.tar.gz":
   version "5.5.1"

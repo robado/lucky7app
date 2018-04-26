@@ -6,16 +6,14 @@ import {Text, View, StyleSheet} from 'react-native';
 export default class AppJsondata extends Component {
     constructor(props) {
         super(props);
-        this.state = {asema: '', sijainti: '', aika: ''};
+        this.state = {asema: '', sijainti: '', aika: '', idtarkka:''};
     };
 
     componentDidUpdate() {
-        if (this.state.asema !== this.props.asema) {
+        if (this.state.asema !== this.props.image[0]) {
         fetch('https://tie.digitraffic.fi/api/v1/data/camera-data/')
             .then((response) => response.json())
             .then((responseData) => {
-
-                let stationIndex = this.props.image[1];
                 let cameraIndex = 0;
                     this.setState({
                         asema: this.props.image[0],
@@ -23,7 +21,10 @@ export default class AppJsondata extends Component {
                         aika: this.props.image[4]
                     });
 
-            });}
+            });
+
+        }
+
     }
 
     render() {
