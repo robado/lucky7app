@@ -3,10 +3,10 @@ import {  AppRegistry, } from 'react-native';
 import {AppMap} from './src/screen/appMap';
 import GooglePlacesInput from './src/screen/AppPlaces';
 import AppJson from "./src/screen/appJson";
+import splash from "./src/screen/splash";
 import { StackNavigator} from 'react-navigation';
 
-
-
+import SplashScreen from 'react-native-splash-screen';
 
 
 class Json extends React.Component {
@@ -44,7 +44,7 @@ class Map extends React.Component {
 
 
 const Navigation = StackNavigator({
-
+       splash: { screen: splash},
         Places: { screen: GooglePlacesInput,
             navigationOptions:{
                 headerStyle:{backgroundColor:'#3a606a', justifyContent: 'center', alignItems:'center'},
@@ -70,16 +70,17 @@ const Navigation = StackNavigator({
 
 
 );
-export default class lucky7app extends React.Component{
-    render() {
+export default class lucky7app extends React.Component {
 
 
-        return (
-            <Navigation/>
 
-        )
-    }
+   render(){
+    return(
+        <Navigation/>
+    )
+   }
 }
+
 
 
 
