@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import {
     Dimensions, Text, FlatList, View, Button, AppRegistry, StyleSheet, ListView,
-    TouchableOpacity, AsyncStorage
-} from 'react-native';
+    TouchableOpacity, AsyncStorage, ActivityIndicator} from 'react-native';
 import MapView from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import MarkerCalloutDefault from '../components/MarkerCalloutDefault';
@@ -112,7 +111,7 @@ export class AppMap extends Component {
             });
 
         this.forceUpdate();
-
+        this.setState({animating: false});
 
     }
 
@@ -121,6 +120,7 @@ export class AppMap extends Component {
 
         super(props);
         this.state = {
+            animating: true,
             coordinates: [
                 {
                     latitude: 61.2345,
@@ -189,7 +189,7 @@ export class AppMap extends Component {
                     {this.state.cameras.map((coordinate, index) =>
                         <MapView.Marker key={`coordinate_${index}`} coordinate={coordinate}
                                         image={require('../assets/img/camera2.bmp')}
-                                        opacity = {0.7}
+                                        opacity = {0.5}
                                         onPress={() =>  {
                                             this.props.navigation.navigate("Json", {location: coordinate});
 
@@ -212,6 +212,7 @@ export class AppMap extends Component {
                         }}
                     />
                 </MapView>
+                <ActivityIndicator animating={this.state.animating} size="large" color="#0000ff" style={{justifyContent: 'center', paddingBottom: 300,}} />
             </View>
         );
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Text, View, FlatList, ScrollView} from 'react-native';
+import {Text, View, FlatList, ScrollView,} from 'react-native';
 import AppJsondata from "../components/appJsondata";
 import AppWeather from "../components/appWeather";
 import AppCamera from "../components/appCamera";
