@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-    Dimensions, Text, FlatList, View, Button, AppRegistry, StyleSheet, ListView,
+    Dimensions, Text, FlatList, View, Button, Modal, StyleSheet, ListView,
     TouchableOpacity, AsyncStorage, ActivityIndicator} from 'react-native';
 import MapView from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
@@ -42,15 +42,15 @@ export class AppMap extends Component {
         original[1] = {latitude: JSON.parse(location.coords.latitude),
                         longitude: JSON.parse(location.coords.longitude)};
         //laitetaan muutettu kopio coordinates arraylististä alkuperäisen tilalle
-        this.setState({coordinates: original});
+       await this.setState({coordinates: original});
 
                             // asemien kordinaattien asettaminen
         //cloonataan waypoints ja otetaan pituus. Poisti yhden bugin
         let placeholderwaypoints = await [...this.state.waypoints];
         let waypoints = await placeholderwaypoints.length;
-        let chunkedway = _.chunk(placeholderwaypoints, [size=(waypoints)/20]);
+        let chunkedway =await _.chunk(placeholderwaypoints, [size=(waypoints)/20]);
+        let chunkedwaylength = await chunkedway.length;
         let boundcameras = [];
-        console.log("chunk: ", chunkedway[0].length);
         await fetch('https://tie.digitraffic.fi/api/v1/metadata/camera-stations')
             .then((response) => response.json())
                 .then((responseData) => {
@@ -61,7 +61,7 @@ export class AppMap extends Component {
                     //asetetaan arraylist, joka tulee sisältämään kaikki tiellä olevat kamerat
                     let filtered = [];
                     //asetetaan latitude ja longitude arraylistaat waypoint-arraylistan objektien arvoista
-                    for (let x=0; x < chunkedway.length; x++) {
+                    for (let x=0; x < chunkedwaylength; x++) {
                         let latitudes = chunkedway[x].map((point) => point.latitude);
                         let longitudes = chunkedway[x].map((point) => point.longitude);
 
@@ -109,10 +109,7 @@ export class AppMap extends Component {
 
                 }
             });
-
-        this.forceUpdate();
         this.setState({animating: false});
-
     }
 
 
@@ -212,8 +209,20 @@ export class AppMap extends Component {
                         }}
                     />
                 </MapView>
-                <ActivityIndicator animating={this.state.animating} size="large" color="#0000ff" style={{justifyContent: 'center', paddingBottom: 300,}} />
-            </View>
+                {this.state.animating &&
+                <View style={{position: 'absolute',
+                    left: 0,
+                    right: 0,
+                    top: 0,
+                    bottom: 0,
+                    opacity: 0.7,
+                    backgroundColor: 'black',
+                    justifyContent: 'center',
+                    alignItems: 'center'}}>
+                    <Text style={{fontFamily:"sans-serif-light", fontSize:30, color:"white", paddingBottom:100, opacity: 1}}>Reittiäsi ladataan</Text>
+                <ActivityIndicator animating={this.state.animating} color="#ddeaff" style={[{justifyContent: 'center'}, {transform: [{scale: 3}]}]} size="large" />
+                </View>}
+                </View>
         );
 
 
