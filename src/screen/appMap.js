@@ -48,7 +48,7 @@ export class AppMap extends Component {
         //cloonataan waypoints ja otetaan pituus. Poisti yhden bugin
         let placeholderwaypoints = await [...this.state.waypoints];
         let waypoints = await placeholderwaypoints.length;
-        let chunkedway =await _.chunk(placeholderwaypoints, [size=(waypoints)/20]);
+        let chunkedway =await _.chunk(placeholderwaypoints, [size=(waypoints)/3]);
         let chunkedwaylength = await chunkedway.length;
         let boundcameras = [];
         await fetch('https://tie.digitraffic.fi/api/v1/metadata/camera-stations')
@@ -64,16 +64,6 @@ export class AppMap extends Component {
                     for (let x=0; x < chunkedwaylength; x++) {
                         let latitudes = chunkedway[x].map((point) => point.latitude);
                         let longitudes = chunkedway[x].map((point) => point.longitude);
-
-                        for (let j = 0; j < cameralength; j++) {
-                            original2[j] = {
-                                latitude: responseData.features[j].geometry.coordinates[1],
-                                longitude: responseData.features[j].geometry.coordinates[0]
-                            };
-                            if (original2[j].latitude > _.min(latitudes) && original2[j].latitude < _.max(latitudes) && original2[j].longitude > _.min(longitudes) && original2[j].longitude < _.max(longitudes)) {
-                                boundcameras.push({latitude: original2[j].latitude, longitude: original2[j].longitude});
-                            }
-                        }
                         //asetetaan boundcameras, minkä tarkoituksena on rajata vertailualgoritmin kokoa
                         //for-lause, joka katsoo, onko kamera tiettyjen koordinaattien muodostamassa neliössä
                         //jos on, niin se lisää koordinaatin bouncameras -arraylistaan
@@ -87,6 +77,7 @@ export class AppMap extends Component {
                                 boundcameras.push({latitude: original2[j].latitude, longitude: original2[j].longitude});
                             }
                         }
+
                     }
                     //for-lause, jossa verrataan kameroita piirrettyyn reittiin. Käytetään boundcameras-arraylistaa, joka
                     //setattiin aikaisemmassa algoritmissa aikavaativuuksien vuoksi
@@ -111,7 +102,6 @@ export class AppMap extends Component {
             });
         this.setState({animating: false});
     }
-
 
     constructor(props) {
 
@@ -161,7 +151,6 @@ export class AppMap extends Component {
 */
     render() {
 
-        let waypoints = this.state.waypoints.length;
         return (
             <View style={[styles.container]}>
                 <MapView
@@ -186,7 +175,7 @@ export class AppMap extends Component {
                     {this.state.cameras.map((coordinate, index) =>
                         <MapView.Marker key={`coordinate_${index}`} coordinate={coordinate}
                                         image={require('../assets/img/camera2.bmp')}
-                                        opacity = {0.5}
+                                        opacity = {0.7}
                                         onPress={() =>  {
                                             this.props.navigation.navigate("Json", {location: coordinate});
 
