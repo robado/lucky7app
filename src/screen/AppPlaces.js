@@ -34,9 +34,8 @@ export class GooglePlacesInput extends Component {
                 fetchDetails={true}
                 renderDescription={(row) => row.description} // custom description render
                 onPress={(data, details = null) =>  {   // 'details' is provided when fetchDetails = true
-                    AsyncStorage.setItem('lattiAsync', details.geometry.location.lat.toString());
-                    AsyncStorage.setItem('longiAsync', details.geometry.location.lng.toString());
-                    this.props.navigation.navigate('Map');
+                    let menocords = [{lat: details.geometry.location.lat, lng: details.geometry.location.lng}]
+                    this.props.navigation.navigate('Map', {menopiste: menocords});
 
                 }}
                 getDefaultValue={() => {

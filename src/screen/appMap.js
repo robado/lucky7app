@@ -25,15 +25,7 @@ export class AppMap extends Component {
 
     async componentWillMount(){
                             //Matkan pisteiden asettaminen
-        //hakee aync storagesta latituden joka on setattu AppPlaces sivulla
-        const setLat = AsyncStorage.getItem('lattiAsync');
-        await setLat;
-        //hakee async storagesta longituden
-        const setLong = AsyncStorage.getItem('longiAsync');
-        await setLong;
-        //laittaa haetut tiedot this.stateen ensimmäisen coordinates arrayn objektiin joka on kohde piste
-        this.state.coordinates[0].latitude = parseFloat(setLat._55);
-        this.state.coordinates[0].longitude = parseFloat(setLong._55);
+
         //hakee react nativen omalla geolocation funktiolla current positionin
         let location = await Location.getCurrentPositionAsync({});
         //cloonataan alkuperäinen coordinates arraylist statesta ja kaikki sen sisältämät arvot
@@ -104,14 +96,16 @@ export class AppMap extends Component {
     }
 
     constructor(props) {
-
         super(props);
+        let lat = this.props.navigation.state.params.menopiste[0].lat;
+        let lng = this.props.navigation.state.params.menopiste[0].lng;
         this.state = {
+
             animating: true,
             coordinates: [
                 {
-                    latitude: 61.2345,
-                    longitude: 26.3425,
+                    latitude: lat,
+                    longitude: lng,
                 },
                 {
                     latitude:  60.2933,
