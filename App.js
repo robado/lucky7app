@@ -6,7 +6,6 @@ import AppJson from "./src/screen/appJson";
 import splash from "./src/screen/splash";
 import { StackNavigator} from 'react-navigation';
 
-import SplashScreen from 'react-native-splash-screen';
 
 
 class Json extends React.Component {
@@ -44,12 +43,14 @@ class Map extends React.Component {
 
 
 const Navigation = StackNavigator({
-       splash: { screen: splash},
+        splash: { screen: splash},
+
         Places: { screen: GooglePlacesInput,
             navigationOptions:{
                 headerStyle:{backgroundColor:'#3a606a'},
                 title: 'Hae Määränpääsi',
                 headerTitleStyle: {color:'#fff'},
+                headerLeft: null
             }
         },
         Map: { screen: AppMap,
