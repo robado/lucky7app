@@ -1,9 +1,11 @@
 import React, {Component}  from 'react';
-import {Image, Text, View} from 'react-native';
+import {Image, StyleSheet, View, Dimensions} from 'react-native';
 import { Asset, AppLoading } from 'expo';
 
 
+
 export default class splash extends Component {
+    static navigationOptions= {header:null};
 
     state = {
         isReady: false};
@@ -27,8 +29,8 @@ export default class splash extends Component {
         }
 
         return (
-            <View>
-                <Image source={require('lucky7app/src/assets/img/logo.png')} />
+            <View >
+                <Image style={styles.container} source={require('lucky7app/src/assets/img/logo.png')} />
             </View>
         )
 
@@ -38,16 +40,20 @@ export default class splash extends Component {
             require('lucky7app/src/assets/img/logo.png'),
 
         ];
-
         const cacheImages = images.map((image) => {
             return Asset.fromModule(image).downloadAsync();
         });
         return Promise.all(cacheImages)
-
     }
-
 
 }
 
+const styles = StyleSheet.create({
+    container: {
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').height
+
+    }
+});
 
 module.exports = splash;

@@ -7,7 +7,6 @@ import splash from "./src/screen/splash";
 import { StackNavigator} from 'react-navigation';
 
 
-
 class Json extends React.Component {
     static navigationOptions = {
         tabBar: {
@@ -15,7 +14,6 @@ class Json extends React.Component {
 
         }
     };
-
     render() {   }
 }
 
@@ -25,7 +23,6 @@ class Places extends React.Component {
             label: 'Places',
         }
     };
-
     render() { }
 }
 
@@ -35,11 +32,8 @@ class Map extends React.Component {
             label: 'Map',
         }
     };
-
     render() { }
 }
-
-
 
 
 const Navigation = StackNavigator({
@@ -68,21 +62,14 @@ const Navigation = StackNavigator({
                 headerTitleStyle: {color:'#fff'},
             }},
     }
-
-
 );
+
 export default class lucky7app extends React.Component {
-
-
-
    render(){
     return(
         <Navigation/>
     )
    }
 }
-
-
-
 
 AppRegistry.registerComponent('lucky7app',()=> 'lucky7app');

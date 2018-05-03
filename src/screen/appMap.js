@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 import {
-    Dimensions, Text, FlatList, View, Button, Modal, StyleSheet, ListView,
-    TouchableOpacity, AsyncStorage, ActivityIndicator} from 'react-native';
+    Dimensions, Text, View, StyleSheet,
+    ActivityIndicator} from 'react-native';
 import MapView from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
-import MarkerCalloutDefault from '../components/MarkerCalloutDefault';
 import { Location} from 'expo';
 import geolib from "geolib";
-import { NavigationActions } from 'react-navigation';
-import appJson from "./appJson";
-import appCamera from "../components/appCamera";
 import _ from "lodash";
 
 const { width, height } = Dimensions.get('window');
@@ -309,8 +305,6 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         alignItems: 'center',
         flex: 1,
-
-
     },
    map: {
         flex: 1,

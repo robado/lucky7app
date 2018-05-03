@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import {Text, View, FlatList, ScrollView,} from 'react-native';
+import {View, ScrollView,} from 'react-native';
 import AppJsondata from "../components/appJsondata";
 import AppWeather from "../components/appWeather";
 import AppCamera from "../components/appCamera";
 
-import { Card, CardTitle, CardContent, CardAction, CardButton, CardImage } from 'react-native-cards';
+import { Card, CardContent } from 'react-native-cards';
 
 export default class AppJson extends Component {
     constructor(props) {
@@ -42,7 +42,6 @@ export default class AppJson extends Component {
             });
         this.forceUpdate();
     }
-
 
     render(){
         return(

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import {View, Image, Dimensions, ScrollView} from 'react-native';
-import {AppMap} from "../screen/appMap";
-import { Card, CardTitle, CardContent, CardAction, CardButton, CardImage } from 'react-native-cards';
+import {View,  ScrollView} from 'react-native';
+import { Card, CardTitle, CardImage } from 'react-native-cards';
 
 const bottom = "25%";
 
