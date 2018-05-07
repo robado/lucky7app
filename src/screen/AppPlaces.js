@@ -25,9 +25,8 @@ export class GooglePlacesInput extends Component {
                 fetchDetails={true}
                 renderDescription={(row) => row.description} // custom description render
                 onPress={(data, details = null) =>  {   // 'details' is provided when fetchDetails = true
-                    let menocords = [{lat: details.geometry.location.lat, lng: details.geometry.location.lng}]
+                    let menocords = [{lat: details.geometry.location.lat, lng: details.geometry.location.lng}];
                     this.props.navigation.navigate('Map', {menopiste: menocords});
-
                 }}
                 getDefaultValue={() => {
                     return ''; // text input default value

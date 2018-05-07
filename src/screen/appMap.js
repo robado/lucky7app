@@ -30,13 +30,12 @@ export class AppMap extends Component {
         original[1] = {latitude: JSON.parse(location.coords.latitude),
                         longitude: JSON.parse(location.coords.longitude)};
         //laitetaan muutettu kopio coordinates arraylististä alkuperäisen tilalle
-       await this.setState({coordinates: original});
-
+        await this.setState({coordinates: original});
                             // asemien kordinaattien asettaminen
         //cloonataan waypoints ja otetaan pituus. Poisti yhden bugin
         let placeholderwaypoints = await [...this.state.waypoints];
         let waypoints = await placeholderwaypoints.length;
-        let chunkedway =await _.chunk(placeholderwaypoints, [size=(waypoints)/3]);
+        let chunkedway = _.chunk(placeholderwaypoints, [size=(waypoints)/3]);
         let chunkedwaylength = await chunkedway.length;
         let boundcameras = [];
         await fetch('https://tie.digitraffic.fi/api/v1/metadata/camera-stations')
