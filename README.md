@@ -12,6 +12,11 @@ Then after all the installation is finished then you can start the app by runnin
 When the program is started you can scan the QR -code on your phone via **Expo** ap or if you have some simulator installed like android studio you can pree **a** and it will open the app in the android emulator
   
 ## Opening /importing project
+
+### Easy way
+Most easy way to open project in **IntellIJ** is to click open and find where your whole project folder is and open the folder
+
+### Long way and it is in Finnish
 Kun saatte clonattua projektin koneelle niin on parikin tapaa avata se ja alkaa muokata sitä.
 
 Meette terminaalilla siihen kansioon missä teillä on se projekti ja kirjoitatte seuraavan komennont "npm install", jolloin se asentaa tarvittavat tiedostot ja sitten voitte runnaa sen projektin "yarn start"
