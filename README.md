@@ -1,5 +1,15 @@
-Lucky7app 
+# Lucky7app 
 
+## Usage
+First **git clone** this repositry and after downloading run the installation command in the terminal (Terminal:
+
+  yarn install
+  
+Then after all the installation is finished then you can start the app by running the next command in terminal:
+
+  yarn start
+  
+## Opening /importing project
 Kun saatte clonattua projektin koneelle niin on parikin tapaa avata se ja alkaa muokata sitä.
 
 Meette terminaalilla siihen kansioon missä teillä on se projekti ja kirjoitatte seuraavan komennont "npm install", jolloin se asentaa tarvittavat tiedostot ja sitten voitte runnaa sen projektin "yarn start"
