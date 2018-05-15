@@ -3,11 +3,13 @@
 ## Usage
 First **git clone** this repositry and after downloading run the installation command in the terminal (Terminal:
 
-  yarn install
+    yarn install
   
 Then after all the installation is finished then you can start the app by running the next command in terminal:
 
-  yarn start
+    yarn start
+    
+When the program is started you can scan the QR -code on your phone via **Expo** ap or if you have some simulator installed like android studio you can pree **a** and it will open the app in the android emulator
   
 ## Opening /importing project
 Kun saatte clonattua projektin koneelle niin on parikin tapaa avata se ja alkaa muokata sitä.
