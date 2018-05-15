@@ -14,7 +14,7 @@ const LATITUDE = 60.1699;
 const LONGITUDE = 24.9384;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
-const GOOGLE_MAPS_APIKEY = 'AIzaSyAk6tQcvv2Wy0uleMAd34PWBbBcnkirJBI'; // syötä apikey tänne
+const GOOGLE_MAPS_APIKEY = 'API-KEY'; // syötä apikey tänne
 
 
 export class AppMap extends Component {
