@@ -1,7 +1,7 @@
 # Lucky7app 
 
 ## Usage
-First **git clone** (https://github.com/robado/lucky7app.git) this repositry and after downloading run the installation command in the terminal (Terminal:
+First **git clone** (https://github.com/robado/lucky7app.git) this repositry and after downloading run the installation command in the terminal (Terminal you can open by typing **cmd** in search box and then press **Enter**):
 
     yarn install
   
